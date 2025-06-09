@@ -1,0 +1,66 @@
+build/default/production/FreeRTOS-Plus-POSIX/source/FreeRTOS_POSIX_sched.o: \
+ FreeRTOS-Plus-POSIX/source/FreeRTOS_POSIX_sched.c \
+ FreeRTOS-Plus-POSIX/include/FreeRTOS_POSIX.h \
+ FreeRTOS-Plus-POSIX/include/portable/microchip/curiosity_pic32mzef/FreeRTOS_POSIX_portable.h \
+ FreeRTOS-Plus-POSIX/include/portable/FreeRTOS_POSIX_portable_default.h \
+ FreeRTOS-Kernel-11.2.0/include/FreeRTOS.h \
+ FreeRTOS-Kernel-11.2.0/include/FreeRTOSConfig.h \
+ FreeRTOS-Kernel-11.2.0/include/projdefs.h \
+ FreeRTOS-Kernel-11.2.0/include/portable.h \
+ FreeRTOS-Kernel-11.2.0/include/deprecated_definitions.h \
+ FreeRTOS-Kernel-11.2.0/portable/MPLAB/PIC32MZ/portmacro.h \
+ FreeRTOS-Kernel-11.2.0/include/mpu_wrappers.h \
+ FreeRTOS-Kernel-11.2.0/include/event_groups.h \
+ FreeRTOS-Kernel-11.2.0/include/timers.h \
+ FreeRTOS-Kernel-11.2.0/include/task.h \
+ FreeRTOS-Kernel-11.2.0/include/list.h \
+ FreeRTOS-Kernel-11.2.0/include/semphr.h \
+ FreeRTOS-Kernel-11.2.0/include/queue.h \
+ FreeRTOS-Kernel-11.2.0/include/task.h include/FreeRTOS_POSIX/sys/types.h \
+ FreeRTOS-Plus-POSIX/include/FreeRTOS_POSIX_types.h \
+ FreeRTOS-Plus-POSIX/include/FreeRTOS_POSIX_internal.h \
+ include/private/iot_doubly_linked_list.h include/FreeRTOS_POSIX/sched.h
+
+FreeRTOS-Plus-POSIX/include/FreeRTOS_POSIX.h:
+
+FreeRTOS-Plus-POSIX/include/portable/microchip/curiosity_pic32mzef/FreeRTOS_POSIX_portable.h:
+
+FreeRTOS-Plus-POSIX/include/portable/FreeRTOS_POSIX_portable_default.h:
+
+FreeRTOS-Kernel-11.2.0/include/FreeRTOS.h:
+
+FreeRTOS-Kernel-11.2.0/include/FreeRTOSConfig.h:
+
+FreeRTOS-Kernel-11.2.0/include/projdefs.h:
+
+FreeRTOS-Kernel-11.2.0/include/portable.h:
+
+FreeRTOS-Kernel-11.2.0/include/deprecated_definitions.h:
+
+FreeRTOS-Kernel-11.2.0/portable/MPLAB/PIC32MZ/portmacro.h:
+
+FreeRTOS-Kernel-11.2.0/include/mpu_wrappers.h:
+
+FreeRTOS-Kernel-11.2.0/include/event_groups.h:
+
+FreeRTOS-Kernel-11.2.0/include/timers.h:
+
+FreeRTOS-Kernel-11.2.0/include/task.h:
+
+FreeRTOS-Kernel-11.2.0/include/list.h:
+
+FreeRTOS-Kernel-11.2.0/include/semphr.h:
+
+FreeRTOS-Kernel-11.2.0/include/queue.h:
+
+FreeRTOS-Kernel-11.2.0/include/task.h:
+
+include/FreeRTOS_POSIX/sys/types.h:
+
+FreeRTOS-Plus-POSIX/include/FreeRTOS_POSIX_types.h:
+
+FreeRTOS-Plus-POSIX/include/FreeRTOS_POSIX_internal.h:
+
+include/private/iot_doubly_linked_list.h:
+
+include/FreeRTOS_POSIX/sched.h:
