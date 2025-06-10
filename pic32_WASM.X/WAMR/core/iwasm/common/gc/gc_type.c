@@ -1213,7 +1213,7 @@ wasm_reftype_is_subtype_of(uint8 type1, const WASMRefType *ref_type1,
         }
         else {
             /* unknown type detected */
-            LOG_ERROR("unknown sub type 0x%02x", type1);
+            LOG_ERROR("unknown sub type 0x%02x\n\r", type1);
             bh_assert(0);
         }
     }

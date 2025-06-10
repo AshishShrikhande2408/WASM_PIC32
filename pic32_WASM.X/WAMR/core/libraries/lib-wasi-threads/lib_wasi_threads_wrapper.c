@@ -101,19 +101,19 @@ thread_spawn_wrapper(wasm_exec_env_t exec_env, uint32 start_arg)
     start_func =
         wasm_runtime_lookup_function(new_module_inst, THREAD_START_FUNCTION);
     if (!start_func) {
-        LOG_ERROR("Failed to find thread start function %s",
+        LOG_ERROR("Failed to find thread start function %s\n\r",
                   THREAD_START_FUNCTION);
         goto thread_preparation_fail;
     }
 
     if (!(thread_start_arg = wasm_runtime_malloc(sizeof(ThreadStartArg)))) {
-        LOG_ERROR("Runtime args allocation failed");
+        LOG_ERROR("Runtime args allocation failed\n\r");
         goto thread_preparation_fail;
     }
 
     thread_start_arg->thread_id = thread_id = allocate_thread_id();
     if (thread_id < 0) {
-        LOG_ERROR("Failed to get thread identifier");
+        LOG_ERROR("Failed to get thread identifier\n\r");
         goto thread_preparation_fail;
     }
     thread_start_arg->arg = start_arg;
@@ -122,7 +122,7 @@ thread_spawn_wrapper(wasm_exec_env_t exec_env, uint32 start_arg)
     ret = wasm_cluster_create_thread(exec_env, new_module_inst, false, 0, 0,
                                      thread_start, thread_start_arg);
     if (ret != 0) {
-        LOG_ERROR("Failed to spawn a new thread");
+        LOG_ERROR("Failed to spawn a new thread\n\r");
         goto thread_spawn_fail;
     }
 

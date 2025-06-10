@@ -38,7 +38,7 @@ tid_allocator_get_tid(TidAllocator *tid_allocator)
 {
     if (tid_allocator->pos == 0) { // Resize stack and push new thread ids
         if (tid_allocator->size == TID_MAX - TID_MIN + 1) {
-            LOG_ERROR("Maximum thread identifier reached");
+            LOG_ERROR("Maximum thread identifier reached\n\r");
             return -1;
         }
 
@@ -46,19 +46,19 @@ tid_allocator_get_tid(TidAllocator *tid_allocator)
         uint32 new_size = MIN(tid_allocator->size * 2, TID_MAX - TID_MIN + 1);
         if (new_size != TID_MAX - TID_MIN + 1
             && new_size / 2 != tid_allocator->size) {
-            LOG_ERROR("Overflow detected during new size calculation");
+            LOG_ERROR("Overflow detected during new size calculation\n\r");
             return -1;
         }
 
         size_t realloc_size = new_size * sizeof(int32);
         if (realloc_size / sizeof(int32) != new_size) {
-            LOG_ERROR("Overflow detected during realloc");
+            LOG_ERROR("Overflow detected during realloc\n\r");
             return -1;
         }
         int32 *tmp =
             wasm_runtime_realloc(tid_allocator->ids, (uint32)realloc_size);
         if (tmp == NULL) {
-            LOG_ERROR("Thread ID allocator realloc failed");
+            LOG_ERROR("Thread ID allocator realloc failed\n\r");
             return -1;
         }
 

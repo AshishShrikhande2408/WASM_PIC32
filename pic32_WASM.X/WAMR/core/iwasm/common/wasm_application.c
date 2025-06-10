@@ -66,7 +66,7 @@ check_main_func_type(const WASMFuncType *type, bool is_memory64)
     if (!(type->param_count == 0 || type->param_count == 2)
         || type->result_count > 1) {
         LOG_ERROR(
-            "WASM execute application failed: invalid main function type.\n");
+            "WASM execute application failed: invalid main function type.\n\r");
         return false;
     }
 
@@ -75,14 +75,14 @@ check_main_func_type(const WASMFuncType *type, bool is_memory64)
              && type->types[1]
                     == (is_memory64 ? VALUE_TYPE_I64 : VALUE_TYPE_I32))) {
         LOG_ERROR(
-            "WASM execute application failed: invalid main function type.\n");
+            "WASM execute application failed: invalid main function type.\n\r");
         return false;
     }
 
     if (type->result_count
         && type->types[type->param_count] != VALUE_TYPE_I32) {
         LOG_ERROR(
-            "WASM execute application failed: invalid main function type.\n");
+            "WASM execute application failed: invalid main function type.\n\r");
         return false;
     }
 
@@ -189,7 +189,7 @@ execute_main(WASMModuleInstanceCommon *module_inst, int32 argc, char *argv[])
     func_type = wasm_runtime_get_function_type(func, module_type);
 
     if (!func_type) {
-        LOG_ERROR("invalid module instance type");
+        LOG_ERROR("invalid module instance type\n\r");
         return false;
     }
 
@@ -385,7 +385,7 @@ execute_func(WASMModuleInstanceCommon *module_inst, const char *name,
     type = wasm_runtime_get_function_type(target_func, module_type);
 
     if (!type) {
-        LOG_ERROR("invalid module instance type");
+        LOG_ERROR("invalid module instance type\n\r");
         return false;
     }
 

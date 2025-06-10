@@ -37,6 +37,8 @@
 #include "init.h"
 #include "wasm_runtime_common.h"
 
+
+
 #define hwUNLOCK_KEY_0					( 0xAA996655UL )
 #define hwUNLOCK_KEY_1					( 0x556699AAUL )
 #define ptOUTPUT 	0
@@ -91,31 +93,45 @@ void vParTestInitialise( void )
 	LATE = ptALL_OFF;
 }
 
-void initWAMR(void)
-{
-    memset(&init_args, 0, sizeof(RuntimeInitArgs));
 
-    /* configure the memory allocator for the runtime */
-    init_args.mem_alloc_type = Alloc_With_Pool;
-    init_args.mem_alloc_option.pool.heap_buf = global_heap_buf;
-    init_args.mem_alloc_option.pool.heap_size = sizeof(global_heap_buf);
-    init_args.running_mode = Mode_Interp;
-    /* set maximum thread number if needed when multi-thread is enabled,
-       the default value is 4 */
-    init_args.max_thread_num = 4;      
 
-    /* initialize runtime environment with user configurations*/
-    if (!wasm_runtime_full_init(&init_args)) 
-    {
-        printf("WAMR Init failed!!\n\r");
-    }
-    else
-    {
-        printf("WAMR Init successful!!\n\r");
-    }   
-    wasm_runtime_set_log_level(WASM_LOG_LEVEL_VERBOSE);
-}
-
+//void initWAMR(void)
+//{
+//    /* setup variables for instantiating and running the wasm module */
+//    uint8_t *wasm_file_buf = NULL;
+//    unsigned wasm_file_buf_size = 0;
+//    char error_buf[128];
+//    wasm_module_t wasm_module = NULL;
+//    wasm_module_inst_t wasm_module_inst = NULL;
+//    wasm_exec_env_t exec_env;
+//    const char *exception;
+//    
+//    memset(&init_args, 0, sizeof(RuntimeInitArgs));
+//
+//    /* configure the memory allocator for the runtime */
+//    init_args.mem_alloc_type = Alloc_With_Pool;
+//    //init_args.mem_alloc_option.allocator.malloc_func = (void *)os_malloc;
+//    //init_args.mem_alloc_option.allocator.realloc_func = (void *)os_realloc;
+//    //init_args.mem_alloc_option.allocator.free_func = (void *)os_free;
+//    init_args.mem_alloc_option.pool.heap_buf = global_heap_buf;
+//    init_args.mem_alloc_option.pool.heap_size = sizeof(global_heap_buf);
+//    //init_args.running_mode = Mode_Interp;
+//
+//    /* set maximum thread number if needed when multi-thread is enabled,
+//       the default value is 4 */
+//    init_args.max_thread_num = 4;      
+//
+//    /* initialize runtime environment with user configurations*/
+//    if (!wasm_runtime_full_init(&init_args)) 
+//    {
+//        printf("WAMR Init failed!!\n\r");
+//    }
+//    else
+//    {
+//        printf("WAMR Init successful!!\n\r");
+//    }   
+//}
+//
 
 
 

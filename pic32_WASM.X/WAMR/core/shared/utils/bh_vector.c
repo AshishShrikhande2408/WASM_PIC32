@@ -56,7 +56,7 @@ bh_vector_init(Vector *vector, size_t init_length, size_t size_elem,
                bool use_lock)
 {
     if (!vector) {
-        LOG_ERROR("Init vector failed: vector is NULL.\n");
+        LOG_ERROR("Init vector failed: vector is NULL.\n\r");
         return false;
     }
 
@@ -65,7 +65,7 @@ bh_vector_init(Vector *vector, size_t init_length, size_t size_elem,
     }
 
     if (!(vector->data = alloc_vector_data(init_length, size_elem))) {
-        LOG_ERROR("Init vector failed: alloc memory failed.\n");
+        LOG_ERROR("Init vector failed: alloc memory failed.\n\r");
         return false;
     }
 
@@ -76,13 +76,13 @@ bh_vector_init(Vector *vector, size_t init_length, size_t size_elem,
 
     if (use_lock) {
         if (!(vector->lock = BH_MALLOC(sizeof(korp_mutex)))) {
-            LOG_ERROR("Init vector failed: alloc locker failed.\n");
+            LOG_ERROR("Init vector failed: alloc locker failed.\n\r");
             bh_vector_destroy(vector);
             return false;
         }
 
         if (BHT_OK != os_mutex_init(vector->lock)) {
-            LOG_ERROR("Init vector failed: init locker failed.\n");
+            LOG_ERROR("Init vector failed: init locker failed.\n\r");
 
             BH_FREE(vector->lock);
             vector->lock = NULL;
@@ -99,12 +99,12 @@ bool
 bh_vector_set(Vector *vector, uint32 index, const void *elem_buf)
 {
     if (!vector || !elem_buf) {
-        LOG_ERROR("Set vector elem failed: vector or elem buf is NULL.\n");
+        LOG_ERROR("Set vector elem failed: vector or elem buf is NULL.\n\r");
         return false;
     }
 
     if (index >= vector->num_elems) {
-        LOG_ERROR("Set vector elem failed: invalid elem index.\n");
+        LOG_ERROR("Set vector elem failed: invalid elem index.\n\r");
         return false;
     }
 
@@ -121,12 +121,12 @@ bool
 bh_vector_get(Vector *vector, uint32 index, void *elem_buf)
 {
     if (!vector || !elem_buf) {
-        LOG_ERROR("Get vector elem failed: vector or elem buf is NULL.\n");
+        LOG_ERROR("Get vector elem failed: vector or elem buf is NULL.\n\r");
         return false;
     }
 
     if (index >= vector->num_elems) {
-        LOG_ERROR("Get vector elem failed: invalid elem index.\n");
+        LOG_ERROR("Get vector elem failed: invalid elem index.\n\r");
         return false;
     }
 
@@ -148,12 +148,12 @@ bh_vector_insert(Vector *vector, uint32 index, const void *elem_buf)
     bool ret = false;
 
     if (!vector || !elem_buf) {
-        LOG_ERROR("Insert vector elem failed: vector or elem buf is NULL.\n");
+        LOG_ERROR("Insert vector elem failed: vector or elem buf is NULL.\n\r");
         goto just_return;
     }
 
     if (index >= vector->num_elems) {
-        LOG_ERROR("Insert vector elem failed: invalid elem index.\n");
+        LOG_ERROR("Insert vector elem failed: invalid elem index.\n\r");
         goto just_return;
     }
 
@@ -161,7 +161,7 @@ bh_vector_insert(Vector *vector, uint32 index, const void *elem_buf)
         os_mutex_lock(vector->lock);
 
     if (!extend_vector(vector, vector->num_elems + 1)) {
-        LOG_ERROR("Insert vector elem failed: extend vector failed.\n");
+        LOG_ERROR("Insert vector elem failed: extend vector failed.\n\r");
         goto unlock_return;
     }
 
@@ -190,7 +190,7 @@ bh_vector_append(Vector *vector, const void *elem_buf)
     bool ret = false;
 
     if (!vector || !elem_buf) {
-        LOG_ERROR("Append vector elem failed: vector or elem buf is NULL.\n");
+        LOG_ERROR("Append vector elem failed: vector or elem buf is NULL.\n\r");
         goto just_return;
     }
 
@@ -199,7 +199,7 @@ bh_vector_append(Vector *vector, const void *elem_buf)
         os_mutex_lock(vector->lock);
 
     if (!extend_vector(vector, vector->num_elems + 1)) {
-        LOG_ERROR("Append ector elem failed: extend vector failed.\n");
+        LOG_ERROR("Append ector elem failed: extend vector failed.\n\r");
         goto unlock_return;
     }
 
@@ -222,12 +222,12 @@ bh_vector_remove(Vector *vector, uint32 index, void *old_elem_buf)
     uint8 *p;
 
     if (!vector) {
-        LOG_ERROR("Remove vector elem failed: vector is NULL.\n");
+        LOG_ERROR("Remove vector elem failed: vector is NULL.\n\r");
         return false;
     }
 
     if (index >= vector->num_elems) {
-        LOG_ERROR("Remove vector elem failed: invalid elem index.\n");
+        LOG_ERROR("Remove vector elem failed: invalid elem index.\n\r");
         return false;
     }
 
@@ -262,7 +262,7 @@ bool
 bh_vector_destroy(Vector *vector)
 {
     if (!vector) {
-        LOG_ERROR("Destroy vector elem failed: vector is NULL.\n");
+        LOG_ERROR("Destroy vector elem failed: vector is NULL.\n\r");
         return false;
     }
 

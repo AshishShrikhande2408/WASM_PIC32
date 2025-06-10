@@ -2361,7 +2361,7 @@ orcjit_thread_callback(void *arg)
     /* Compile fast jit functions of this group */
     for (i = group_idx; i < func_count; i += group_stride) {
         if (!jit_compiler_compile(module, i + module->import_function_count)) {
-            LOG_ERROR("failed to compile fast jit function %u\n", i);
+            LOG_ERROR("failed to compile fast jit function %u\n\r", i);
             break;
         }
 
@@ -2438,7 +2438,7 @@ orcjit_thread_callback(void *arg)
             LLVMOrcLLLazyJITLookup(comp_ctx->orc_jit, &func_addr, func_name);
         if (error != LLVMErrorSuccess) {
             char *err_msg = LLVMGetErrorMessage(error);
-            LOG_ERROR("failed to compile llvm jit function %u: %s", i, err_msg);
+            LOG_ERROR("failed to compile llvm jit function %u: %s\n\r", i, err_msg);
             LLVMDisposeErrorMessage(err_msg);
             break;
         }
@@ -2459,7 +2459,7 @@ orcjit_thread_callback(void *arg)
                                                func_name);
                 if (error != LLVMErrorSuccess) {
                     char *err_msg = LLVMGetErrorMessage(error);
-                    LOG_ERROR("failed to compile llvm jit function %u: %s", i,
+                    LOG_ERROR("failed to compile llvm jit function %u: %s\n\r", i,
                               err_msg);
                     LLVMDisposeErrorMessage(err_msg);
                     /* Ignore current llvm jit func, as its func ptr is

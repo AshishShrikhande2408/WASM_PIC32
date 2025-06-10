@@ -37,13 +37,13 @@ bh_hash_map_create(uint32 size, bool use_lock, HashFunc hash_func,
         size = HASH_MAP_MIN_SIZE;
 
     if (size > HASH_MAP_MAX_SIZE) {
-        LOG_ERROR("HashMap create failed: size is too large.\n");
+        LOG_ERROR("HashMap create failed: size is too large.\n\r");
         return NULL;
     }
 
     if (!hash_func || !key_equal_func) {
         LOG_ERROR("HashMap create failed: hash function or key equal function "
-                  " is NULL.\n");
+                  " is NULL.\n\r");
         return NULL;
     }
 
@@ -54,7 +54,8 @@ bh_hash_map_create(uint32 size, bool use_lock, HashFunc hash_func,
     /* size <= HASH_MAP_MAX_SIZE, so total_size won't be larger than
        UINT32_MAX, no need to check integer overflow */
     if (!(map = BH_MALLOC((uint32)total_size))) {
-        LOG_ERROR("HashMap create failed: alloc memory failed.\n");
+        LOG_ERROR("HashMap create failed: alloc memory failed.\n\r");
+        LOG_ERROR("total_size=%d\n\r",total_size);
         return NULL;
     }
 
@@ -64,7 +65,7 @@ bh_hash_map_create(uint32 size, bool use_lock, HashFunc hash_func,
         map->lock = (korp_mutex *)((uint8 *)map + offsetof(HashMap, elements)
                                    + sizeof(HashMapElem *) * size);
         if (os_mutex_init(map->lock)) {
-            LOG_ERROR("HashMap create failed: init map lock failed.\n");
+            LOG_ERROR("HashMap create failed: init map lock failed.\n\r");
             BH_FREE(map);
             return NULL;
         }
@@ -85,7 +86,7 @@ bh_hash_map_insert(HashMap *map, void *key, void *value)
     HashMapElem *elem;
 
     if (!map || !key) {
-        LOG_ERROR("HashMap insert elem failed: map or key is NULL.\n");
+        LOG_ERROR("HashMap insert elem failed: map or key is NULL.\n\r");
         return false;
     }
 
@@ -97,14 +98,14 @@ bh_hash_map_insert(HashMap *map, void *key, void *value)
     elem = map->elements[index];
     while (elem) {
         if (map->key_equal_func(elem->key, key)) {
-            LOG_ERROR("HashMap insert elem failed: duplicated key found.\n");
+            LOG_ERROR("HashMap insert elem failed: duplicated key found.\n\r");
             goto fail;
         }
         elem = elem->next;
     }
 
     if (!(elem = BH_MALLOC(sizeof(HashMapElem)))) {
-        LOG_ERROR("HashMap insert elem failed: alloc memory failed.\n");
+        LOG_ERROR("HashMap insert elem failed: alloc memory failed.\n\r");
         goto fail;
     }
 
@@ -133,7 +134,7 @@ bh_hash_map_find(HashMap *map, void *key)
     void *value;
 
     if (!map || !key) {
-        LOG_ERROR("HashMap find elem failed: map or key is NULL.\n");
+        LOG_ERROR("HashMap find elem failed: map or key is NULL.\n\r");
         return NULL;
     }
 
@@ -168,7 +169,7 @@ bh_hash_map_update(HashMap *map, void *key, void *value, void **p_old_value)
     HashMapElem *elem;
 
     if (!map || !key) {
-        LOG_ERROR("HashMap update elem failed: map or key is NULL.\n");
+        LOG_ERROR("HashMap update elem failed: map or key is NULL.\n\r");
         return false;
     }
 
@@ -206,7 +207,7 @@ bh_hash_map_remove(HashMap *map, void *key, void **p_old_key,
     HashMapElem *elem, *prev;
 
     if (!map || !key) {
-        LOG_ERROR("HashMap remove elem failed: map or key is NULL.\n");
+        LOG_ERROR("HashMap remove elem failed: map or key is NULL.\n\r");
         return false;
     }
 
@@ -254,7 +255,7 @@ bh_hash_map_destroy(HashMap *map)
     HashMapElem *elem, *next;
 
     if (!map) {
-        LOG_ERROR("HashMap destroy failed: map is NULL.\n");
+        LOG_ERROR("HashMap destroy failed: map is NULL.\n\r");
         return false;
     }
 
@@ -314,7 +315,7 @@ bh_hash_map_traverse(HashMap *map, TraverseCallbackFunc callback,
     HashMapElem *elem, *next;
 
     if (!map || !callback) {
-        LOG_ERROR("HashMap traverse failed: map or callback is NULL.\n");
+        LOG_ERROR("HashMap traverse failed: map or callback is NULL.\n\r");
         return false;
     }
 

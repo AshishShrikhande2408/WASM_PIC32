@@ -1,1 +1,0 @@
-$(MP_EXTRA_AS_PRE)  -c -mprocessor=$(MP_PROCESSOR_OPTION) -DXPRJ_default=$(CND_CONF)    -Wa,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_AS_POST),--gdwarf-2 -mdfp="${DFP_DIR}"C:\Projects\WASM\MPLABXProjects\pic32_WASM.X\FreeRTOS-Kernel-11.2.0\portable\MPLAB\PIC32MZ\UART2_isr.S

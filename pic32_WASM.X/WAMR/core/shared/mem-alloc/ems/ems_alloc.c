@@ -220,7 +220,7 @@ unlink_hmu(gc_heap_t *heap, hmu_t *hmu)
         }
 
         if (!node) {
-            LOG_ERROR("[GC_ERROR]couldn't find the node in the normal list\n");
+            LOG_ERROR("[GC_ERROR]couldn't find the node in the normal list\n\r");
         }
     }
     else {
@@ -575,7 +575,7 @@ gc_alloc_vo_internal(void *vheap, gc_size_t size, const char *file, int line)
 
 #if BH_ENABLE_GC_CORRUPTION_CHECK != 0
     if (heap->is_heap_corrupted) {
-        LOG_ERROR("[GC_ERROR]Heap is corrupted, allocate memory failed.\n");
+        LOG_ERROR("[GC_ERROR]Heap is corrupted, allocate memory failed.\n\r");
         return NULL;
     }
 #endif
@@ -639,7 +639,7 @@ gc_realloc_vo_internal(void *vheap, void *ptr, gc_size_t size, const char *file,
 
 #if BH_ENABLE_GC_CORRUPTION_CHECK != 0
     if (heap->is_heap_corrupted) {
-        LOG_ERROR("[GC_ERROR]Heap is corrupted, allocate memory failed.\n");
+        LOG_ERROR("[GC_ERROR]Heap is corrupted, allocate memory failed.\n\r");
         return NULL;
     }
 #endif
@@ -731,7 +731,7 @@ finish:
     return ret;
 }
 
-#if GC_MANUALLY != 0
+#if (GC_MANUALLY != 0)
 void
 gc_free_wo(void *vheap, void *ptr)
 {
@@ -856,7 +856,7 @@ gc_free_vo_internal(void *vheap, gc_object_t obj, const char *file, int line)
 
 #if BH_ENABLE_GC_CORRUPTION_CHECK != 0
     if (heap->is_heap_corrupted) {
-        LOG_ERROR("[GC_ERROR]Heap is corrupted, free memory failed.\n");
+        LOG_ERROR("[GC_ERROR]Heap is corrupted, free memory failed.\n\r");
         return GC_ERROR;
     }
 #endif
@@ -984,7 +984,7 @@ gci_dump(gc_heap_t *heap)
 
 #if BH_ENABLE_GC_CORRUPTION_CHECK != 0
         if (size == 0 || size > (uint32)((uint8 *)end - (uint8 *)cur)) {
-            LOG_ERROR("[GC_ERROR]Heap is corrupted, heap dump failed.\n");
+            LOG_ERROR("[GC_ERROR]Heap is corrupted, heap dump failed.\n\r");
             heap->is_heap_corrupted = true;
             return;
         }
@@ -1007,7 +1007,7 @@ gci_dump(gc_heap_t *heap)
 
 #if BH_ENABLE_GC_CORRUPTION_CHECK != 0
     if (cur != end) {
-        LOG_ERROR("[GC_ERROR]Heap is corrupted, heap dump failed.\n");
+        LOG_ERROR("[GC_ERROR]Heap is corrupted, heap dump failed.\n\r");
         heap->is_heap_corrupted = true;
     }
 #else
@@ -1075,7 +1075,7 @@ insert_extra_info_node(gc_heap_t *vheap, extra_info_node_t *node)
 
         new_nodes = (extra_info_node_t **)BH_MALLOC(total_size);
         if (!new_nodes) {
-            LOG_ERROR("alloc extra info nodes failed");
+            LOG_ERROR("alloc extra info nodes failed\n\r");
             return false;
         }
 
@@ -1119,7 +1119,7 @@ gc_set_finalizer(gc_handle_t handle, gc_object_t obj, gc_finalizer_t cb,
     node = (extra_info_node_t *)BH_MALLOC(sizeof(extra_info_node_t));
 
     if (!node) {
-        LOG_ERROR("alloc a new extra info node failed");
+        LOG_ERROR("alloc a new extra info node failed\n\r");
         return GC_FALSE;
     }
     memset(node, 0, sizeof(extra_info_node_t));

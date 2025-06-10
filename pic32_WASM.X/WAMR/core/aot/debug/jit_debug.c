@@ -122,7 +122,7 @@ CreateJITCodeEntryInternal(const uint8 *symfile_addr, uint64 symfile_size)
     os_mutex_lock(&jit_debug_engine->jit_entry_lock);
 
     if (!(entry = wasm_runtime_malloc(sizeof(JITCodeEntry)))) {
-        LOG_ERROR("WASM JIT Debug Engine error: failed to allocate memory");
+        LOG_ERROR("WASM JIT Debug Engine error: failed to allocate memory\n\r");
         os_mutex_unlock(&jit_debug_engine->jit_entry_lock);
         return NULL;
     }
@@ -178,7 +178,7 @@ jit_debug_engine_init(void)
     }
 
     if (!(jit_debug_engine = wasm_runtime_malloc(sizeof(WASMJITDebugEngine)))) {
-        LOG_ERROR("WASM JIT Debug Engine error: failed to allocate memory");
+        LOG_ERROR("WASM JIT Debug Engine error: failed to allocate memory\n\r");
         return false;
     }
     memset(jit_debug_engine, 0, sizeof(WASMJITDebugEngine));
@@ -223,7 +223,7 @@ jit_code_entry_create(const uint8 *symfile_addr, uint64 symfile_size)
     WASMJITEntryNode *node;
 
     if (!(node = wasm_runtime_malloc(sizeof(WASMJITEntryNode)))) {
-        LOG_ERROR("WASM JIT Debug Engine error: failed to allocate memory");
+        LOG_ERROR("WASM JIT Debug Engine error: failed to allocate memory\n\r");
         return false;
     }
 

@@ -38,7 +38,7 @@ alloc_mark_node(void)
     mark_node_t *ret = (mark_node_t *)BH_MALLOC(sizeof(mark_node_t));
 
     if (!ret) {
-        LOG_ERROR("alloc a new mark node failed");
+        LOG_ERROR("alloc a new mark node failed\n\r");
         return NULL;
     }
     ret->cnt = sizeof(ret->set) / sizeof(ret->set[0]);
@@ -180,7 +180,7 @@ add_wo_to_expand(gc_heap_t *heap, gc_object_t obj)
         new_node = alloc_mark_node();
         if (!new_node) {
             LOG_ERROR("can not add obj to mark node because of mark node "
-                      "allocation failed");
+                      "allocation failed\n\r");
             return GC_ERROR;
         }
         new_node->next = mark_node;
@@ -201,25 +201,25 @@ gc_add_root(void *heap_p, gc_object_t obj)
     hmu_t *hmu = NULL;
 
     if (!obj) {
-        LOG_ERROR("gc_add_root with NULL obj");
+        LOG_ERROR("gc_add_root with NULL obj\n\r");
         return GC_ERROR;
     }
 
     hmu = obj_to_hmu(obj);
 
     if (!gci_is_heap_valid(heap)) {
-        LOG_ERROR("vm_get_gc_handle_for_current_instance returns invalid heap");
+        LOG_ERROR("vm_get_gc_handle_for_current_instance returns invalid heap\n\r");
         return GC_ERROR;
     }
 
     if (!((gc_uint8 *)hmu >= heap->base_addr
           && (gc_uint8 *)hmu < heap->base_addr + heap->current_size)) {
-        LOG_ERROR("Obj is not a object in current instance heap");
+        LOG_ERROR("Obj is not a object in current instance heap\n\r");
         return GC_ERROR;
     }
 
     if (hmu_get_ut(hmu) != HMU_WO) {
-        LOG_ERROR("Given object is not wo");
+        LOG_ERROR("Given object is not wo\n\r");
         return GC_ERROR;
     }
 
@@ -337,8 +337,8 @@ reclaim_instance_heap(gc_heap_t *heap)
     /* TODO: when fast marking failed, we can still do slow
        marking, currently just simply roll it back.  */
     if (heap->is_fast_marking_failed) {
-        LOG_ERROR("enumerate rootset failed");
-        LOG_ERROR("all marked wos will be unmarked to keep heap consistency");
+        LOG_ERROR("enumerate rootset failed\n\r");
+        LOG_ERROR("all marked wos will be unmarked to keep heap consistency\n\r");
 
         rollback_mark(heap);
         heap->is_fast_marking_failed = 0;
@@ -365,12 +365,12 @@ reclaim_instance_heap(gc_heap_t *heap)
                                                  &ref_num, &ref_list,
                                                  &ref_start_offset)) {
                 LOG_ERROR("mark process failed because failed "
-                          "vm_get_wasm_object_ref_list");
+                          "vm_get_wasm_object_ref_list\n\r");
                 break;
             }
 
             if (ref_num >= 2U * GB) {
-                LOG_ERROR("Invalid ref_num returned");
+                LOG_ERROR("Invalid ref_num returned\n\r");
                 break;
             }
 
@@ -382,7 +382,7 @@ reclaim_instance_heap(gc_heap_t *heap)
                     if (ref == NULL_REF || ((uintptr_t)ref & 1))
                         continue; /* null object or i31 object */
                     if (add_wo_to_expand(heap, ref) == GC_ERROR) {
-                        LOG_ERROR("add_wo_to_expand failed");
+                        LOG_ERROR("add_wo_to_expand failed\n\r");
                         break;
                     }
                 }
@@ -398,7 +398,7 @@ reclaim_instance_heap(gc_heap_t *heap)
                     if (ref == NULL_REF || ((uintptr_t)ref & 1))
                         continue; /* null object or i31 object */
                     if (add_wo_to_expand(heap, ref) == GC_ERROR) {
-                        LOG_ERROR("mark process failed");
+                        LOG_ERROR("mark process failed\n\r");
                         break;
                     }
                 }
@@ -415,7 +415,7 @@ reclaim_instance_heap(gc_heap_t *heap)
     }
 
     if (mark_node) {
-        LOG_ERROR("mark process is not successfully finished");
+        LOG_ERROR("mark process is not successfully finished\n\r");
 
         free_mark_node(mark_node);
         /* roll back is required */

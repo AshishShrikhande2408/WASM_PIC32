@@ -2482,7 +2482,8 @@ wasm_instantiate(WASMModule *module, WASMModuleInstance *parent,
             gc_heap_size = GC_HEAP_SIZE_MIN;
         if (gc_heap_size > GC_HEAP_SIZE_MAX)
             gc_heap_size = GC_HEAP_SIZE_MAX;
-
+        
+        printf("gc_heap_size = %d\n\r",gc_heap_size);
         module_inst->e->common.gc_heap_pool =
             runtime_malloc(gc_heap_size, error_buf, error_buf_size);
         if (!module_inst->e->common.gc_heap_pool)

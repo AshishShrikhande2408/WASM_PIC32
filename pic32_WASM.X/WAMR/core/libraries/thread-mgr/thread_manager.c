@@ -228,7 +228,7 @@ wasm_cluster_create(WASMExecEnv *exec_env)
 
     bh_assert(exec_env->cluster == NULL);
     if (!(cluster = wasm_runtime_malloc(sizeof(WASMCluster)))) {
-        LOG_ERROR("thread manager error: failed to allocate memory");
+        LOG_ERROR("thread manager error: failed to allocate memory\n\r");
         return NULL;
     }
     memset(cluster, 0, sizeof(WASMCluster));
@@ -239,7 +239,7 @@ wasm_cluster_create(WASMExecEnv *exec_env)
     bh_list_insert(&cluster->exec_env_list, exec_env);
     if (os_mutex_init(&cluster->lock) != 0) {
         wasm_runtime_free(cluster);
-        LOG_ERROR("thread manager error: failed to init mutex");
+        LOG_ERROR("thread manager error: failed to init mutex\n\r");
         return NULL;
     }
 
@@ -247,7 +247,7 @@ wasm_cluster_create(WASMExecEnv *exec_env)
     if (!wasm_exec_env_get_aux_stack(exec_env, &aux_stack_start,
                                      &aux_stack_size)) {
 #if WASM_ENABLE_LIB_WASI_THREADS == 0
-        LOG_VERBOSE("No aux stack info for this module, can't create thread");
+        LOG_VERBOSE("No aux stack info for this module, can't create thread\n\r");
 #endif
 
         /* If the module don't have aux stack info, don't throw error here,
@@ -391,7 +391,7 @@ wasm_cluster_add_exec_env(WASMCluster *cluster, WASMExecEnv *exec_env)
 
     if (cluster->exec_env_list.len == cluster_max_thread_num + 1) {
         LOG_ERROR("thread manager error: "
-                  "maximum number of threads exceeded");
+                  "maximum number of threads exceeded\n\r");
         ret = false;
     }
 
@@ -523,7 +523,7 @@ wasm_cluster_spawn_exec_env(WASMExecEnv *exec_env)
     if (!wasm_cluster_allocate_aux_stack(exec_env, &aux_stack_start,
                                          &aux_stack_size)) {
         LOG_ERROR("thread manager error: "
-                  "failed to allocate aux stack space for new thread");
+                  "failed to allocate aux stack space for new thread\n\r");
         goto fail1;
     }
 
@@ -1225,7 +1225,7 @@ wasm_cluster_register_destroy_callback(void (*callback)(WASMCluster *))
     DestroyCallBackNode *node;
 
     if (!(node = wasm_runtime_malloc(sizeof(DestroyCallBackNode)))) {
-        LOG_ERROR("thread manager error: failed to allocate memory");
+        LOG_ERROR("thread manager error: failed to allocate memory\n\r");
         return false;
     }
     node->destroy_cb = callback;

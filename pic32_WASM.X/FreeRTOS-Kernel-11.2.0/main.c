@@ -6,6 +6,9 @@
 #include "FreeRTOS_POSIX.h"
 #include "FreeRTOS_POSIX/pthread.h"
 #include "UART2.h"
+#include "platform_common.h"
+#include "wasm_runtime.h"
+#include "test_wasm.h"
 
 
 #if defined(__32MZ2048EFM100 )
@@ -29,8 +32,12 @@
 /* Priorities at which the tasks are created. */
 #define mainQUEUE_SEND_TASK_PRIORITY       ( tskIDLE_PRIORITY + 1 )
 #define mainQUEUE_RECEIVE_TASK_PRIORITY    ( tskIDLE_PRIORITY + 2 )
+#define CONFIG_APP_STACK_SIZE 8192
+#define CONFIG_APP_HEAP_SIZE 32768
 
 static pthread_t thread_id_GreenLed,thread_id_AmberLed,thread_id_uart,thread_id_WASM;
+static pthread_attr_t wasm_attr;
+static char global_heap_buf[WASM_GLOBAL_HEAP_SIZE] = { 0 };
 
 void vApplicationMallocFailedHook( void )
 {
@@ -274,22 +281,97 @@ static void *uartSendTask( void * pvParameters )
     }
 }
 
-static void *WASMTask( void * pvParameters )
+static void *
+app_instance_main(wasm_module_inst_t module_inst)
 {
-    TickType_t xLastWakeTime;
-    /* Remove compiler warnings in the case where configASSERT() is not defined. */
-    ( void ) pvParameters;
+    const char *exception;
 
-    const TickType_t xFrequency = 1;
+    wasm_application_execute_main(module_inst, 0, NULL);
+    if ((exception = wasm_runtime_get_exception(module_inst)))
+        printf("%s\n\r", exception);
+    return NULL;
+}
+
+void *
+iwasm_main(void *arg)
+{
+    (void)arg; /* unused */
+    /* setup variables for instantiating and running the wasm module */
+    uint8_t *wasm_file_buf = NULL;
+    unsigned wasm_file_buf_size = 0;
+    wasm_module_t wasm_module = NULL;
+    wasm_module_inst_t wasm_module_inst = NULL;
+    char error_buf[128];
+    void *ret;
+    RuntimeInitArgs init_args;
+
+    /* configure memory allocation */
+    memset(&init_args, 0, sizeof(RuntimeInitArgs));
+
+    //init_args.mem_alloc_type = Alloc_With_Allocator;
+    //init_args.mem_alloc_option.allocator.malloc_func = (void *)os_malloc;
+    //init_args.mem_alloc_option.allocator.realloc_func = (void *)os_realloc;
+    //init_args.mem_alloc_option.allocator.free_func = (void *)os_free;
+    init_args.mem_alloc_type = Alloc_With_Pool;
+    init_args.mem_alloc_option.pool.heap_buf = global_heap_buf;
+    init_args.mem_alloc_option.pool.heap_size = sizeof(global_heap_buf);
     
-    // Initialise the xLastWakeTime variable with the current time.
-    xLastWakeTime = xTaskGetTickCount();
-   
-    while(1)
-    {
-       // Wait for the next cycle.
-       vTaskDelayUntil( &xLastWakeTime, xFrequency );        
+    printf("Initialize WASM runtime\n\r");
+    /* initialize runtime environment */
+    if (!wasm_runtime_full_init(&init_args)) {
+        printf("Init runtime failed.\n\r");
+        return NULL;
     }
+    else
+    {
+        printf("wasm_runtime_full_init successful!!\n\r");
+    }
+
+    printf("Run wamr with interpreter\n\r");
+
+    wasm_file_buf = (uint8_t *)wasm_test_file_interp;
+    wasm_file_buf_size = sizeof(wasm_test_file_interp);
+
+    /* load WASM module */
+    if (!(wasm_module = wasm_runtime_load(wasm_file_buf, wasm_file_buf_size,
+                                          error_buf, sizeof(error_buf)))) {
+        printf("Error in wasm_runtime_load: %s\n\r", error_buf);
+    }
+    else
+    {
+        printf("wasm_runtime_load successful!!\n\r");
+    }
+    
+
+    printf("Instantiate WASM runtime\n\r");
+    if (!(wasm_module_inst =
+              wasm_runtime_instantiate(wasm_module, CONFIG_APP_STACK_SIZE, // stack size
+                                      CONFIG_APP_HEAP_SIZE,              // heap size
+                                       error_buf, sizeof(error_buf)))) {
+        printf("Error while instantiating: %s\n\r", error_buf);
+    }
+    else
+    {
+        printf("wasm_runtime_instantiate successful!!\n\r");
+    }
+    while(1);
+    printf("run main() of the application\n\r");
+    ret = app_instance_main(wasm_module_inst);
+    assert(!ret);
+
+    /* destroy the module instance */
+    printf("Deinstantiate WASM runtime\n\r");
+    wasm_runtime_deinstantiate(wasm_module_inst);
+
+    /* unload the module */
+    printf("Unload WASM module\n\r");
+    wasm_runtime_unload(wasm_module);
+
+    /* destroy runtime environment */
+    printf("Destroy WASM runtime\n\r");
+    wasm_runtime_destroy();
+
+    return NULL;
 }
 
 /*
@@ -299,11 +381,13 @@ int main( void )
 {
     /* Prepare the hardware to run this demo. */
     prvSetupHardware();
-    initWAMR();
+    pthread_attr_init(&wasm_attr);
+    pthread_attr_setstacksize(&wasm_attr, 8192);
     pthread_create( &thread_id_GreenLed, NULL, blinkLEDGreen, NULL );
     pthread_create( &thread_id_AmberLed, NULL, blinkLEDAmber, NULL );    
-    pthread_create( &thread_id_uart, NULL, uartSendTask, NULL );
-    pthread_create( &thread_id_WASM, NULL, WASMTask, NULL );
+    //pthread_create( &thread_id_uart, NULL, uartSendTask, NULL );
+    pthread_create( &thread_id_WASM, &wasm_attr, iwasm_main, NULL );
+    
     /* Start the created tasks running. */
     vTaskStartScheduler();
     

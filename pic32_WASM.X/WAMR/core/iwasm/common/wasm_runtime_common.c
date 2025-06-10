@@ -182,7 +182,7 @@ static RunningMode runtime_running_mode = Mode_Default;
 static os_thread_local_attribute WASMExecEnv *exec_env_tls = NULL;
 
 static bool
-is_sig_addr_in_guard_pages(void *sig_addr, WASMModuleInstance *module_inst)
+is_sig_addr_in_guard_pages(void *sig_addrWASM_STACK_GUARD_SIZE, WASMModuleInstance *module_inst)
 {
     WASMMemoryInstance *memory_inst;
 #if WASM_ENABLE_SHARED_HEAP != 0
@@ -1165,7 +1165,7 @@ wasm_runtime_register_module(const char *module_name, WASMModuleCommon *module,
                              char *error_buf, uint32 error_buf_size)
 {
     if (!error_buf || !error_buf_size) {
-        LOG_ERROR("error buffer is required");
+        LOG_ERROR("error buffer is required\n\r");
         return false;
     }
 
@@ -2587,7 +2587,7 @@ wasm_runtime_call_wasm(WASMExecEnv *exec_env,
 #endif
 
     if (!wasm_runtime_exec_env_check(exec_env)) {
-        LOG_ERROR("Invalid exec env stack info.");
+        LOG_ERROR("Invalid exec env stack info.\n\r");
         return false;
     }
 
@@ -2833,7 +2833,7 @@ wasm_runtime_call_wasm_a(WASMExecEnv *exec_env,
 
     if (!type) {
         LOG_ERROR("Function type get failed, WAMR Interpreter and AOT must be "
-                  "enabled at least one.");
+                  "enabled at least one.\n\r");
         goto fail1;
     }
 
@@ -2863,7 +2863,7 @@ wasm_runtime_call_wasm_a(WASMExecEnv *exec_env,
 
     if (num_args != type->param_count) {
         LOG_ERROR("The argument value number does not match the function "
-                  "declaration.");
+                  "declaration.\n\r");
         goto fail1;
     }
 
@@ -2906,13 +2906,13 @@ wasm_runtime_call_wasm_v(WASMExecEnv *exec_env,
 
     if (!type) {
         LOG_ERROR("Function type get failed, WAMR Interpreter and AOT "
-                  "must be enabled at least one.");
+                  "must be enabled at least one.\n\r");
         goto fail1;
     }
 
     if (num_args != type->param_count) {
         LOG_ERROR("The argument value number does not match the "
-                  "function declaration.");
+                  "function declaration.\n\r");
         goto fail1;
     }
 
@@ -3972,7 +3972,7 @@ wasm_runtime_lookup_wasi_start_function(WASMModuleInstanceCommon *module_inst)
             if (func->u.func->func_type->param_count != 0
                 || func->u.func->func_type->result_count != 0) {
                 LOG_ERROR("Lookup wasi _start function failed: "
-                          "invalid function type.\n");
+                          "invalid function type.\n\r");
                 return NULL;
             }
             return (WASMFunctionInstanceCommon *)func;
@@ -3989,7 +3989,7 @@ wasm_runtime_lookup_wasi_start_function(WASMModuleInstanceCommon *module_inst)
             AOTFuncType *func_type = func->u.func.func_type;
             if (func_type->param_count != 0 || func_type->result_count != 0) {
                 LOG_ERROR("Lookup wasi _start function failed: "
-                          "invalid function type.\n");
+                          "invalid function type.\n\r");
                 return NULL;
             }
             return func;
@@ -6172,7 +6172,7 @@ wasm_runtime_call_indirect(WASMExecEnv *exec_env, uint32 element_index,
     bool ret = false;
 
     if (!wasm_runtime_exec_env_check(exec_env)) {
-        LOG_ERROR("Invalid exec env stack info.");
+        LOG_ERROR("Invalid exec env stack info.\n\r");
         return false;
     }
 
@@ -7314,7 +7314,7 @@ wasm_runtime_show_app_heap_corrupted_prompt()
               "please add -Wl,--export=malloc -Wl,--export=free "
               "to export malloc and free functions. If it is "
               "compiled by asc, please add --exportRuntime to "
-              "export the runtime helpers.");
+              "export the runtime helpers.\n\r");
 }
 
 #if WASM_ENABLE_LOAD_CUSTOM_SECTION != 0

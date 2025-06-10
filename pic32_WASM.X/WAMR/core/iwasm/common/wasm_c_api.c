@@ -669,7 +669,7 @@ wasm_store_new(wasm_engine_t *engine)
     if (!retrieve_thread_local_store_num(&engine->stores_by_tid,
                                          os_self_thread())) {
         if (!wasm_runtime_init_thread_env()) {
-            LOG_ERROR("init thread environment failed");
+            LOG_ERROR("init thread environment failed\n\r");
             return NULL;
         }
 
@@ -2202,7 +2202,7 @@ check_loaded_module(Vector *modules, char *binary_hash)
     for (i = 0; i < modules->num_elems; i++) {
         bh_vector_get(modules, i, &module);
         if (!module) {
-            LOG_ERROR("Unexpected failure at %d\n", __LINE__);
+            LOG_ERROR("Unexpected failure at %d\n\r", __LINE__);
             return NULL;
         }
 
@@ -2311,7 +2311,7 @@ wasm_module_new_ex(wasm_store_t *store, wasm_byte_vec_t *binary, LoadArgs *args)
         (uint8 *)module_ex->binary->data, (uint32)module_ex->binary->size, args,
         error_buf, (uint32)sizeof(error_buf));
     if (!(module_ex->module_comm_rt)) {
-        LOG_ERROR("%s", error_buf);
+        LOG_ERROR("%s\n\r", error_buf);
         goto free_vec;
     }
 
@@ -2352,7 +2352,7 @@ free_binary:
 free_module:
     wasm_runtime_free(module_ex);
 quit:
-    LOG_ERROR("%s failed", __FUNCTION__);
+    LOG_ERROR("%s failed\n\r", __FUNCTION__);
     return NULL;
 }
 
@@ -2376,7 +2376,7 @@ wasm_module_validate(wasm_store_t *store, const wasm_byte_vec_t *binary)
     bh_assert(singleton_engine);
 
     if (!store || !binary || binary->size > UINT32_MAX) {
-        LOG_ERROR("%s failed", __FUNCTION__);
+        LOG_ERROR("%s failed\n\r", __FUNCTION__);
         return false;
     }
 
@@ -2863,7 +2863,7 @@ wasm_module_serialize(wasm_module_t *module, own wasm_byte_vec_t *out)
 {
     (void)module;
     (void)out;
-    LOG_ERROR("only supported serialization in JIT with eager compilation");
+    LOG_ERROR("only supported serialization in JIT with eager compilation\n\r");
 }
 
 own wasm_module_t *
@@ -2871,7 +2871,7 @@ wasm_module_deserialize(wasm_store_t *module, const wasm_byte_vec_t *binary)
 {
     (void)module;
     (void)binary;
-    LOG_ERROR("only supported deserialization in JIT with eager compilation");
+    LOG_ERROR("only supported deserialization in JIT with eager compilation\n\r");
     return NULL;
 }
 #else
@@ -2929,7 +2929,7 @@ wasm_module_obtain(wasm_store_t *store, wasm_shared_module_t *shared_module)
 
     /* deleting the module... */
     if (module_ex->ref_count == 0) {
-        LOG_WARNING("wasm_module_obtain re-enter a module under deleting.");
+        LOG_WARNING("wasm_module_obtain re-enter a module under deleting.\n\r");
         os_mutex_unlock(&module_ex->lock);
         return NULL;
     }
@@ -4847,7 +4847,7 @@ do_link(const wasm_instance_t *inst, const wasm_module_t *module,
         wasm_extern_t *import = imports->data[i];
 
         if (!import) {
-            LOG_ERROR("imports[%d] is NULL and it is fatal\n", i);
+            LOG_ERROR("imports[%d] is NULL and it is fatal\n\r", i);
             goto failed;
         }
 
@@ -5365,7 +5365,7 @@ wasm_extern_new_empty(wasm_store_t *store, wasm_externkind_t extern_kind)
     if (extern_kind == WASM_EXTERN_GLOBAL)
         return wasm_global_as_extern(wasm_global_new_empty(store));
 
-    LOG_ERROR("Don't support linking table and memory for now");
+    LOG_ERROR("Don't support linking table and memory for now\n\r");
     return NULL;
 }
 

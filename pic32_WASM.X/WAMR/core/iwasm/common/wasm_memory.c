@@ -88,7 +88,7 @@ wasm_memory_init_with_pool(void *mem, unsigned int bytes)
         global_pool_size = bytes;
         return true;
     }
-    LOG_ERROR("Init memory with pool (%p, %u) failed.\n", mem, bytes);
+    LOG_ERROR("Init memory with pool (%p, %u) failed.\n\r", mem, bytes);
     return false;
 }
 
@@ -105,7 +105,7 @@ wasm_memory_init_with_allocator(void *_user_data, void *_malloc_func,
         free_func = _free_func;
         return true;
     }
-    LOG_ERROR("Init memory with allocator (%p, %p, %p, %p) failed.\n",
+    LOG_ERROR("Init memory with allocator (%p, %p, %p, %p) failed.\n\r",
               _user_data, _malloc_func, _realloc_func, _free_func);
     return false;
 }
@@ -121,7 +121,7 @@ wasm_memory_init_with_allocator(void *malloc_func_ptr, void *realloc_func_ptr,
         free_func = free_func_ptr;
         return true;
     }
-    LOG_ERROR("Init memory with allocator (%p, %p, %p) failed.\n",
+    LOG_ERROR("Init memory with allocator (%p, %p, %p) failed.\n\r",
               malloc_func_ptr, realloc_func_ptr, free_func_ptr);
     return false;
 }

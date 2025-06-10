@@ -58,10 +58,10 @@
 #endif
 
 #ifndef BH_DEBUG
-#define BH_DEBUG 0
+#define BH_DEBUG 1
 #endif
 
-#define MEM_ALLOCATOR_EMS 0
+#define MEM_ALLOCATOR_EMS 1
 #define MEM_ALLOCATOR_TLSF 1
 
 /* Default memory allocator */
@@ -211,7 +211,7 @@
 
 /* Bulk memory operation */
 #ifndef WASM_ENABLE_BULK_MEMORY
-#define WASM_ENABLE_BULK_MEMORY 1
+#define WASM_ENABLE_BULK_MEMORY 0
 #endif
 
 /* Shared memory */
@@ -283,7 +283,7 @@
 
 /* Enable fast interpreter or not */
 #ifndef WASM_ENABLE_FAST_INTERP
-#define WASM_ENABLE_FAST_INTERP 1
+#define WASM_ENABLE_FAST_INTERP 0
 #endif
 
 #if WASM_ENABLE_FAST_INTERP != 0
@@ -297,12 +297,12 @@
 
 /* Support a module with dependency, other modules */
 #ifndef WASM_ENABLE_MULTI_MODULE
-#define WASM_ENABLE_MULTI_MODULE 1
+#define WASM_ENABLE_MULTI_MODULE 0
 #endif
 
 /* Enable wasm mini loader or not */
 #ifndef WASM_ENABLE_MINI_LOADER
-#define WASM_ENABLE_MINI_LOADER 1
+#define WASM_ENABLE_MINI_LOADER 0
 #endif
 
 /* Disable boundary check with hardware trap or not,
@@ -388,7 +388,7 @@ unless used elsewhere */
 
 /* Global heap pool size in bytes */
 #ifndef WASM_GLOBAL_HEAP_SIZE
-#define WASM_GLOBAL_HEAP_SIZE (10 * 1024 * 1024)
+#define WASM_GLOBAL_HEAP_SIZE (32 * 1024)
 #endif
 
 /* Default length of queue */
@@ -542,7 +542,7 @@ unless used elsewhere */
  * Embedders for very small devices likely fine-tune WASM_STACK_GUARD_SIZE
  * for their specific applications anyway.
  */
-#define WASM_STACK_GUARD_SIZE 1024
+#define WASM_STACK_GUARD_SIZE (32 * 1024)
 #endif
 #endif
 #endif
@@ -664,7 +664,7 @@ unless used elsewhere */
    to speed up the calling process of invoking the AOT/JIT functions of
    these types from the host embedder */
 #ifndef WASM_ENABLE_QUICK_AOT_ENTRY
-#define WASM_ENABLE_QUICK_AOT_ENTRY 1
+#define WASM_ENABLE_QUICK_AOT_ENTRY 0
 #endif
 
 /* Support AOT intrinsic functions which can be called from the AOT code
@@ -672,7 +672,7 @@ unless used elsewhere */
    `--enable-builtin-intrinsics=<intr1,intr2,...>` is used by wamrc to
    generate the AOT file */
 #ifndef WASM_ENABLE_AOT_INTRINSICS
-#define WASM_ENABLE_AOT_INTRINSICS 1
+#define WASM_ENABLE_AOT_INTRINSICS 0
 #endif
 
 /* Disable memory64 by default */
@@ -709,11 +709,11 @@ unless used elsewhere */
 #endif
 
 #ifndef WASM_ENABLE_SHRUNK_MEMORY
-#define WASM_ENABLE_SHRUNK_MEMORY 1
+#define WASM_ENABLE_SHRUNK_MEMORY 0
 #endif
 
 #ifndef WASM_ENABLE_AOT_VALIDATOR
-#define WASM_ENABLE_AOT_VALIDATOR 1
+#define WASM_ENABLE_AOT_VALIDATOR 0
 #endif
 
 #ifndef WASM_ENABLE_INSTRUCTION_METERING

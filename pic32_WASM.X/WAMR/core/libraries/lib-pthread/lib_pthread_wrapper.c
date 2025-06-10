@@ -619,7 +619,7 @@ pthread_create_wrapper(wasm_exec_env_t exec_env,
     if (!wasm_cluster_allocate_aux_stack(exec_env, &aux_stack_start,
                                          &aux_stack_size)) {
         LOG_ERROR("thread manager error: "
-                  "failed to allocate aux stack space for new thread");
+                  "failed to allocate aux stack space for new thread\n\r");
         goto fail;
     }
 
