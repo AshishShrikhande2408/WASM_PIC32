@@ -1842,7 +1842,7 @@
         </C32Global>
       </item>
       <item path="WAMR/core/iwasm/interpreter/wasm_interp_classic.c"
-            ex="true"
+            ex="false"
             overriding="false">
         <C32>
         </C32>
@@ -1860,7 +1860,7 @@
         </C32Global>
       </item>
       <item path="WAMR/core/iwasm/interpreter/wasm_interp_fast.c"
-            ex="false"
+            ex="true"
             overriding="false">
         <C32>
         </C32>

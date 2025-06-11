@@ -23,7 +23,41 @@ build/default/production/FreeRTOS-Kernel-11.2.0/main.o: \
  include/private/iot_doubly_linked_list.h \
  include/FreeRTOS_POSIX/pthread.h include/FreeRTOS_POSIX/sched.h \
  include/FreeRTOS_POSIX/time.h include/FreeRTOS_POSIX/signal.h \
- FreeRTOS-Kernel-11.2.0/include/UART2.h
+ FreeRTOS-Kernel-11.2.0/include/UART2.h \
+ WAMR/core/shared/platform/include/platform_common.h \
+ WAMR/core/shared/platform/include/platform_internal.h \
+ WAMR/core/shared/platform/include/../../../config.h \
+ WAMR/core/iwasm/interpreter/wasm_runtime.h \
+ WAMR/core/iwasm/interpreter/wasm.h WAMR/core/shared/utils/bh_platform.h \
+ WAMR/core/shared/utils/../platform/include/platform_common.h \
+ WAMR/core/shared/utils/../platform/include/platform_api_vmcore.h \
+ WAMR/core/shared/utils/../platform/include/platform_common.h \
+ WAMR/core/shared/utils/../platform/include/platform_internal.h \
+ WAMR/core/shared/utils/../platform/include/platform_api_extension.h \
+ WAMR/core/shared/utils/../platform/include/platform_wasi_types.h \
+ c:\projects\wasm\wasm_pic32\pic32_wasm.x\wamr\core\config.h \
+ WAMR/core/shared/utils/bh_assert.h WAMR/core/shared/utils/bh_platform.h \
+ WAMR/core/shared/utils/bh_common.h WAMR/core/shared/utils/bh_hashmap.h \
+ WAMR/core/shared/utils/bh_list.h WAMR/core/shared/utils/bh_log.h \
+ WAMR/core/shared/utils/bh_queue.h WAMR/core/shared/utils/bh_vector.h \
+ WAMR/core/shared/utils/runtime_timer.h \
+ WAMR/core/iwasm/include/wasm_export.h \
+ WAMR/core/iwasm/include/lib_export.h WAMR/core/shared/utils/bh_hashmap.h \
+ WAMR/core/shared/utils/bh_assert.h WAMR/core/iwasm/include/gc_export.h \
+ WAMR/core/iwasm/include/wasm_export.h WAMR/core/shared/utils/bh_atomic.h \
+ WAMR/core/shared/utils/gnuc.h WAMR/core/shared/utils/bh_bitmap.h \
+ WAMR/core/iwasm/interpreter/../common/wasm_runtime_common.h \
+ WAMR/core/shared/utils/bh_common.h \
+ WAMR/core/iwasm/interpreter/../common/wasm_exec_env.h \
+ WAMR/core/iwasm/interpreter/../common/wasm_suspend_flags.h \
+ WAMR/core/iwasm/interpreter/../common/../interpreter/wasm.h \
+ WAMR/core/iwasm/interpreter/../common/wasm_native.h \
+ WAMR/core/iwasm/interpreter/../common/../include/wasm_export.h \
+ WAMR/core/iwasm/interpreter/../common/gc/gc_object.h \
+ WAMR/core/iwasm/interpreter/../common/gc/gc_type.h \
+ WAMR/core/iwasm/interpreter/../interpreter/wasm.h \
+ WAMR/core/iwasm/interpreter/../common/wasm_exec_env.h \
+ include/private/test_wasm.h
 
 FreeRTOS-Kernel-11.2.0/include/FreeRTOS.h:
 
@@ -78,3 +112,89 @@ include/FreeRTOS_POSIX/time.h:
 include/FreeRTOS_POSIX/signal.h:
 
 FreeRTOS-Kernel-11.2.0/include/UART2.h:
+
+WAMR/core/shared/platform/include/platform_common.h:
+
+WAMR/core/shared/platform/include/platform_internal.h:
+
+WAMR/core/shared/platform/include/../../../config.h:
+
+WAMR/core/iwasm/interpreter/wasm_runtime.h:
+
+WAMR/core/iwasm/interpreter/wasm.h:
+
+WAMR/core/shared/utils/bh_platform.h:
+
+WAMR/core/shared/utils/../platform/include/platform_common.h:
+
+WAMR/core/shared/utils/../platform/include/platform_api_vmcore.h:
+
+WAMR/core/shared/utils/../platform/include/platform_common.h:
+
+WAMR/core/shared/utils/../platform/include/platform_internal.h:
+
+WAMR/core/shared/utils/../platform/include/platform_api_extension.h:
+
+WAMR/core/shared/utils/../platform/include/platform_wasi_types.h:
+
+c:\projects\wasm\wasm_pic32\pic32_wasm.x\wamr\core\config.h:
+
+WAMR/core/shared/utils/bh_assert.h:
+
+WAMR/core/shared/utils/bh_platform.h:
+
+WAMR/core/shared/utils/bh_common.h:
+
+WAMR/core/shared/utils/bh_hashmap.h:
+
+WAMR/core/shared/utils/bh_list.h:
+
+WAMR/core/shared/utils/bh_log.h:
+
+WAMR/core/shared/utils/bh_queue.h:
+
+WAMR/core/shared/utils/bh_vector.h:
+
+WAMR/core/shared/utils/runtime_timer.h:
+
+WAMR/core/iwasm/include/wasm_export.h:
+
+WAMR/core/iwasm/include/lib_export.h:
+
+WAMR/core/shared/utils/bh_hashmap.h:
+
+WAMR/core/shared/utils/bh_assert.h:
+
+WAMR/core/iwasm/include/gc_export.h:
+
+WAMR/core/iwasm/include/wasm_export.h:
+
+WAMR/core/shared/utils/bh_atomic.h:
+
+WAMR/core/shared/utils/gnuc.h:
+
+WAMR/core/shared/utils/bh_bitmap.h:
+
+WAMR/core/iwasm/interpreter/../common/wasm_runtime_common.h:
+
+WAMR/core/shared/utils/bh_common.h:
+
+WAMR/core/iwasm/interpreter/../common/wasm_exec_env.h:
+
+WAMR/core/iwasm/interpreter/../common/wasm_suspend_flags.h:
+
+WAMR/core/iwasm/interpreter/../common/../interpreter/wasm.h:
+
+WAMR/core/iwasm/interpreter/../common/wasm_native.h:
+
+WAMR/core/iwasm/interpreter/../common/../include/wasm_export.h:
+
+WAMR/core/iwasm/interpreter/../common/gc/gc_object.h:
+
+WAMR/core/iwasm/interpreter/../common/gc/gc_type.h:
+
+WAMR/core/iwasm/interpreter/../interpreter/wasm.h:
+
+WAMR/core/iwasm/interpreter/../common/wasm_exec_env.h:
+
+include/private/test_wasm.h:
