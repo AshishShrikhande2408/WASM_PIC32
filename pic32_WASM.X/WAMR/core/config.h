@@ -388,7 +388,7 @@ unless used elsewhere */
 
 /* Global heap pool size in bytes */
 #ifndef WASM_GLOBAL_HEAP_SIZE
-#define WASM_GLOBAL_HEAP_SIZE (32 * 1024)
+#define WASM_GLOBAL_HEAP_SIZE (66 * 1024)
 #endif
 
 /* Default length of queue */
@@ -412,7 +412,7 @@ unless used elsewhere */
 
 /* Default min/max gc heap size of each app */
 #ifndef GC_HEAP_SIZE_DEFAULT
-#define GC_HEAP_SIZE_DEFAULT (128 * 1024)
+#define GC_HEAP_SIZE_DEFAULT (64 * 1024)
 #endif
 #define GC_HEAP_SIZE_MIN (4 * 1024)
 #define GC_HEAP_SIZE_MAX (1024 * 1024 * 1024)

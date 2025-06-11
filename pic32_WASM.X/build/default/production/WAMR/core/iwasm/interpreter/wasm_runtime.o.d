@@ -26,7 +26,7 @@ build/default/production/WAMR/core/iwasm/interpreter/wasm_runtime.o: \
  include/private/iot_doubly_linked_list.h \
  include/FreeRTOS_POSIX/pthread.h include/FreeRTOS_POSIX/sched.h \
  include/FreeRTOS_POSIX/time.h include/FreeRTOS_POSIX/signal.h \
- c:\projects\wasm\wasm_pic32\pic32_wasm.x\wamr\core\config.h \
+ WAMR/core/shared/utils/../platform/include/../../../config.h \
  WAMR/core/shared/utils/../platform/include/platform_api_vmcore.h \
  WAMR/core/shared/utils/../platform/include/platform_common.h \
  WAMR/core/shared/utils/../platform/include/platform_api_extension.h \
@@ -127,7 +127,7 @@ include/FreeRTOS_POSIX/time.h:
 
 include/FreeRTOS_POSIX/signal.h:
 
-c:\projects\wasm\wasm_pic32\pic32_wasm.x\wamr\core\config.h:
+WAMR/core/shared/utils/../platform/include/../../../config.h:
 
 WAMR/core/shared/utils/../platform/include/platform_api_vmcore.h:
 

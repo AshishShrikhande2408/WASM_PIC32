@@ -55,7 +55,7 @@ bh_log(LogLevel log_level, const char *file, int line, const char *fmt, ...)
     os_vprintf(fmt, ap);
     va_end(ap);
 
-    os_printf("\n");
+    os_printf("\n\r");
 }
 #endif
 

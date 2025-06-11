@@ -35,7 +35,7 @@ build/default/production/FreeRTOS-Kernel-11.2.0/main.o: \
  WAMR/core/shared/utils/../platform/include/platform_internal.h \
  WAMR/core/shared/utils/../platform/include/platform_api_extension.h \
  WAMR/core/shared/utils/../platform/include/platform_wasi_types.h \
- c:\projects\wasm\wasm_pic32\pic32_wasm.x\wamr\core\config.h \
+ WAMR/core/shared/utils/../platform/include/../../../config.h \
  WAMR/core/shared/utils/bh_assert.h WAMR/core/shared/utils/bh_platform.h \
  WAMR/core/shared/utils/bh_common.h WAMR/core/shared/utils/bh_hashmap.h \
  WAMR/core/shared/utils/bh_list.h WAMR/core/shared/utils/bh_log.h \
@@ -137,7 +137,7 @@ WAMR/core/shared/utils/../platform/include/platform_api_extension.h:
 
 WAMR/core/shared/utils/../platform/include/platform_wasi_types.h:
 
-c:\projects\wasm\wasm_pic32\pic32_wasm.x\wamr\core\config.h:
+WAMR/core/shared/utils/../platform/include/../../../config.h:
 
 WAMR/core/shared/utils/bh_assert.h:
 

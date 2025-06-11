@@ -307,6 +307,8 @@ iwasm_main(void *arg)
 
     /* configure memory allocation */
     memset(&init_args, 0, sizeof(RuntimeInitArgs));
+    
+    bh_log_set_verbose_level(BH_LOG_LEVEL_VERBOSE);
 
     //init_args.mem_alloc_type = Alloc_With_Allocator;
     //init_args.mem_alloc_option.allocator.malloc_func = (void *)os_malloc;
@@ -355,6 +357,7 @@ iwasm_main(void *arg)
         printf("wasm_runtime_instantiate successful!!\n\r");
     }
     while(1);
+    
     printf("run main() of the application\n\r");
     ret = app_instance_main(wasm_module_inst);
     assert(!ret);
