@@ -32,8 +32,8 @@
 /* Priorities at which the tasks are created. */
 #define mainQUEUE_SEND_TASK_PRIORITY       ( tskIDLE_PRIORITY + 1 )
 #define mainQUEUE_RECEIVE_TASK_PRIORITY    ( tskIDLE_PRIORITY + 2 )
-#define CONFIG_APP_STACK_SIZE 8192
-#define CONFIG_APP_HEAP_SIZE 32768
+#define CONFIG_APP_STACK_SIZE 4096
+#define CONFIG_APP_HEAP_SIZE 2048
 
 static pthread_t thread_id_GreenLed,thread_id_AmberLed,thread_id_uart,thread_id_WASM;
 static pthread_attr_t wasm_attr;
@@ -55,6 +55,7 @@ void vApplicationMallocFailedHook( void )
 
     for( ; ; )
     {
+        
     }
 }
 /*-----------------------------------------------------------*/
@@ -268,7 +269,7 @@ static void *uartSendTask( void * pvParameters )
     /* Remove compiler warnings in the case where configASSERT() is not defined. */
     ( void ) pvParameters;
 
-    const TickType_t xFrequency = 500;
+    const TickType_t xFrequency = 10000;
     
     // Initialise the xLastWakeTime variable with the current time.
 
@@ -317,7 +318,7 @@ iwasm_main(void *arg)
     init_args.mem_alloc_type = Alloc_With_Pool;
     init_args.mem_alloc_option.pool.heap_buf = global_heap_buf;
     init_args.mem_alloc_option.pool.heap_size = sizeof(global_heap_buf);
-    
+    printf("\n\r******************************Start WAMR*********************************\n\r");
     printf("Initialize WASM runtime\n\r");
     /* initialize runtime environment */
     if (!wasm_runtime_full_init(&init_args)) {
@@ -355,13 +356,14 @@ iwasm_main(void *arg)
     else
     {
         printf("wasm_runtime_instantiate successful!!\n\r");
-    }
-    while(1);
-    
+    }    
+
+       
     printf("run main() of the application\n\r");
     ret = app_instance_main(wasm_module_inst);
     assert(!ret);
-
+    printf("run main() was successful!!\n\r");
+     
     /* destroy the module instance */
     printf("Deinstantiate WASM runtime\n\r");
     wasm_runtime_deinstantiate(wasm_module_inst);
@@ -373,7 +375,7 @@ iwasm_main(void *arg)
     /* destroy runtime environment */
     printf("Destroy WASM runtime\n\r");
     wasm_runtime_destroy();
-
+    while(1);
     return NULL;
 }
 
@@ -385,10 +387,10 @@ int main( void )
     /* Prepare the hardware to run this demo. */
     prvSetupHardware();
     pthread_attr_init(&wasm_attr);
-    pthread_attr_setstacksize(&wasm_attr, 8192);
+    pthread_attr_setstacksize(&wasm_attr, 32768);
     pthread_create( &thread_id_GreenLed, NULL, blinkLEDGreen, NULL );
     pthread_create( &thread_id_AmberLed, NULL, blinkLEDAmber, NULL );    
-    //pthread_create( &thread_id_uart, NULL, uartSendTask, NULL );
+    pthread_create( &thread_id_uart, NULL, uartSendTask, NULL );
     pthread_create( &thread_id_WASM, &wasm_attr, iwasm_main, NULL );
     
     /* Start the created tasks running. */

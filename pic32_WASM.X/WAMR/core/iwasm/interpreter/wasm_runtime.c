@@ -4085,7 +4085,7 @@ wasm_get_module_mem_consumption(const WASMModule *module,
 
     mem_conspn->types_size = sizeof(WASMFuncType *) * module->type_count;
     for (i = 0; i < module->type_count; i++) {
-        WASMFuncType *type = module->types[i];
+        WASMFuncType *type = (WASMFuncType *)module->types[i];
         size = offsetof(WASMFuncType, types)
                + sizeof(uint8) * (type->param_count + type->result_count);
         mem_conspn->types_size += size;

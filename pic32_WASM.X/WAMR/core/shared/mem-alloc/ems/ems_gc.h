@@ -20,11 +20,11 @@ extern "C" {
 #endif
 
 #ifndef GC_STAT_DATA
-#define GC_STAT_DATA 0
+#define GC_STAT_DATA 1
 #endif
 
 #ifndef GC_STAT_SHOW
-#define GC_STAT_SHOW 0
+#define GC_STAT_SHOW 1
 #endif
 
 #ifndef GC_IN_EVERY_ALLOCATION

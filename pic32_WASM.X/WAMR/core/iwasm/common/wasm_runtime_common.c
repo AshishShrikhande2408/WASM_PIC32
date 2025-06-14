@@ -1851,19 +1851,19 @@ wasm_runtime_dump_module_mem_consumption(const WASMModuleCommon *module)
     }
 #endif
 
-    os_printf("WASM module memory consumption, total size: %u\n",
+    os_printf("WASM module memory consumption, total size: %u\n\r",
               mem_conspn.total_size);
-    os_printf("    module struct size: %u\n", mem_conspn.module_struct_size);
-    os_printf("    types size: %u\n", mem_conspn.types_size);
-    os_printf("    imports size: %u\n", mem_conspn.imports_size);
-    os_printf("    funcs size: %u\n", mem_conspn.functions_size);
-    os_printf("    tables size: %u\n", mem_conspn.tables_size);
-    os_printf("    memories size: %u\n", mem_conspn.memories_size);
-    os_printf("    globals size: %u\n", mem_conspn.globals_size);
-    os_printf("    exports size: %u\n", mem_conspn.exports_size);
-    os_printf("    table segs size: %u\n", mem_conspn.table_segs_size);
-    os_printf("    data segs size: %u\n", mem_conspn.data_segs_size);
-    os_printf("    const strings size: %u\n", mem_conspn.const_strs_size);
+    os_printf("    module struct size: %u\n\r", mem_conspn.module_struct_size);
+    os_printf("    types size: %u\n\r", mem_conspn.types_size);
+    os_printf("    imports size: %u\n\r", mem_conspn.imports_size);
+    os_printf("    funcs size: %u\n\r", mem_conspn.functions_size);
+    os_printf("    tables size: %u\n\r", mem_conspn.tables_size);
+    os_printf("    memories size: %u\n\r", mem_conspn.memories_size);
+    os_printf("    globals size: %u\n\r", mem_conspn.globals_size);
+    os_printf("    exports size: %u\n\r", mem_conspn.exports_size);
+    os_printf("    table segs size: %u\n\r", mem_conspn.table_segs_size);
+    os_printf("    data segs size: %u\n\r", mem_conspn.data_segs_size);
+    os_printf("    const strings size: %u\n\r", mem_conspn.const_strs_size);
 #if WASM_ENABLE_AOT != 0
     os_printf("    aot code size: %u\n", mem_conspn.aot_code_size);
 #endif
@@ -1888,16 +1888,16 @@ wasm_runtime_dump_module_inst_mem_consumption(
     }
 #endif
 
-    os_printf("WASM module inst memory consumption, total size: %lu\n",
+    os_printf("WASM module inst memory consumption, total size: %lu\n\r",
               mem_conspn.total_size);
-    os_printf("    module inst struct size: %u\n",
+    os_printf("    module inst struct size: %u\n\r",
               mem_conspn.module_inst_struct_size);
-    os_printf("    memories size: %lu\n", mem_conspn.memories_size);
-    os_printf("        app heap size: %u\n", mem_conspn.app_heap_size);
-    os_printf("    tables size: %u\n", mem_conspn.tables_size);
-    os_printf("    functions size: %u\n", mem_conspn.functions_size);
-    os_printf("    globals size: %u\n", mem_conspn.globals_size);
-    os_printf("    exports size: %u\n", mem_conspn.exports_size);
+    os_printf("    memories size: %lu\n\r", mem_conspn.memories_size);
+    os_printf("        app heap size: %u\n\r", mem_conspn.app_heap_size);
+    os_printf("    tables size: %u\n\r", mem_conspn.tables_size);
+    os_printf("    functions size: %u\n\r", mem_conspn.functions_size);
+    os_printf("    globals size: %u\n\r", mem_conspn.globals_size);
+    os_printf("    exports size: %u\n\r", mem_conspn.exports_size);
 }
 
 void
@@ -1906,14 +1906,14 @@ wasm_runtime_dump_exec_env_mem_consumption(const WASMExecEnv *exec_env)
     uint32 total_size =
         offsetof(WASMExecEnv, wasm_stack_u.bottom) + exec_env->wasm_stack_size;
 
-    os_printf("Exec env memory consumption, total size: %u\n", total_size);
-    os_printf("    exec env struct size: %u\n",
+    os_printf("Exec env memory consumption, total size: %u\n\r", total_size);
+    os_printf("    exec env struct size: %u\n\r",
               offsetof(WASMExecEnv, wasm_stack_u.bottom));
 #if WASM_ENABLE_INTERP != 0 && WASM_ENABLE_FAST_INTERP == 0
-    os_printf("        block addr cache size: %u\n",
+    os_printf("        block addr cache size: %u\n\r",
               sizeof(exec_env->block_addr_cache));
 #endif
-    os_printf("    stack size: %u\n", exec_env->wasm_stack_size);
+    os_printf("    stack size: %u\n\r", exec_env->wasm_stack_size);
 }
 
 uint32
@@ -1974,20 +1974,20 @@ wasm_runtime_dump_mem_consumption(WASMExecEnv *exec_env)
                  + exec_env->wasm_stack_size + module_mem_consps.total_size
                  + module_inst_mem_consps.total_size;
 
-    os_printf("\nMemory consumption summary (bytes):\n");
+    os_printf("\nMemory consumption summary (bytes):\n\r");
     wasm_runtime_dump_module_mem_consumption(module_common);
     wasm_runtime_dump_module_inst_mem_consumption(module_inst_common);
     wasm_runtime_dump_exec_env_mem_consumption(exec_env);
     os_printf("\nTotal memory consumption of module, module inst and "
-              "exec env: %" PRIu64 "\n",
+              "exec env: %" PRIu64 "\n\r",
               total_size);
-    os_printf("Total interpreter stack used: %u\n",
+    os_printf("Total interpreter stack used: %u\n\r",
               exec_env->max_wasm_stack_used);
 
     if (max_aux_stack_used != (uint32)-1)
-        os_printf("Total auxiliary stack used: %u\n", max_aux_stack_used);
+        os_printf("Total auxiliary stack used: %u\n\r", max_aux_stack_used);
     else
-        os_printf("Total aux stack used: no enough info to profile\n");
+        os_printf("Total aux stack used: no enough info to profile\n\r");
 
     /*
      * Report the native stack usage estimation.
@@ -1999,13 +1999,13 @@ wasm_runtime_dump_mem_consumption(WASMExecEnv *exec_env)
      * It doesn't cover host func implementations, signal handlers, etc.
      */
     if (exec_env->native_stack_top_min != (void *)UINTPTR_MAX)
-        os_printf("Native stack left: %zd\n",
+        os_printf("Native stack left: %zd\n\r",
                   exec_env->native_stack_top_min
                       - exec_env->native_stack_boundary);
     else
-        os_printf("Native stack left: no enough info to profile\n");
+        os_printf("Native stack left: no enough info to profile\n\r");
 
-    os_printf("Total app heap used: %u\n", app_heap_peak_size);
+    os_printf("Total app heap used: %u\n\r", app_heap_peak_size);
 }
 #endif /* end of (WASM_ENABLE_MEMORY_PROFILING != 0) \
                  || (WASM_ENABLE_MEMORY_TRACING != 0) */

@@ -61,7 +61,7 @@
 #define BH_DEBUG 1
 #endif
 
-#define MEM_ALLOCATOR_EMS 1
+#define MEM_ALLOCATOR_EMS 0
 #define MEM_ALLOCATOR_TLSF 1
 
 /* Default memory allocator */
@@ -335,12 +335,12 @@ unless used elsewhere */
 
 /* Memory profiling */
 #ifndef WASM_ENABLE_MEMORY_PROFILING
-#define WASM_ENABLE_MEMORY_PROFILING 0
+#define WASM_ENABLE_MEMORY_PROFILING 1
 #endif
 
 /* Memory tracing */
 #ifndef WASM_ENABLE_MEMORY_TRACING
-#define WASM_ENABLE_MEMORY_TRACING 0
+#define WASM_ENABLE_MEMORY_TRACING 1
 #endif
 
 /* Performance profiling */
@@ -350,7 +350,7 @@ unless used elsewhere */
 
 /* Dump call stack */
 #ifndef WASM_ENABLE_DUMP_CALL_STACK
-#define WASM_ENABLE_DUMP_CALL_STACK 0
+#define WASM_ENABLE_DUMP_CALL_STACK 1
 #endif
 
 /* AOT stack frame */
@@ -388,7 +388,7 @@ unless used elsewhere */
 
 /* Global heap pool size in bytes */
 #ifndef WASM_GLOBAL_HEAP_SIZE
-#define WASM_GLOBAL_HEAP_SIZE (66 * 1024)
+#define WASM_GLOBAL_HEAP_SIZE (32 * 1024)
 #endif
 
 /* Default length of queue */
@@ -412,7 +412,7 @@ unless used elsewhere */
 
 /* Default min/max gc heap size of each app */
 #ifndef GC_HEAP_SIZE_DEFAULT
-#define GC_HEAP_SIZE_DEFAULT (64 * 1024)
+#define GC_HEAP_SIZE_DEFAULT (16 * 1024)
 #endif
 #define GC_HEAP_SIZE_MIN (4 * 1024)
 #define GC_HEAP_SIZE_MAX (1024 * 1024 * 1024)
@@ -421,7 +421,7 @@ unless used elsewhere */
 #if defined(BUILD_TARGET_X86_64) || defined(BUILD_TARGET_AMD_64)
 #define DEFAULT_WASM_STACK_SIZE (16 * 1024)
 #else
-#define DEFAULT_WASM_STACK_SIZE (12 * 1024)
+#define DEFAULT_WASM_STACK_SIZE (32 * 1024)
 #endif
 /* Min auxiliary stack size of each wasm thread */
 #define WASM_THREAD_AUX_STACK_SIZE_MIN (256)
@@ -604,7 +604,7 @@ unless used elsewhere */
 #endif
 
 #ifndef WASM_ENABLE_EXCE_HANDLING
-#define WASM_ENABLE_EXCE_HANDLING 1
+#define WASM_ENABLE_EXCE_HANDLING 0
 #endif
 
 #ifndef WASM_ENABLE_TAGS
@@ -690,7 +690,7 @@ unless used elsewhere */
 #endif
 
 #ifndef WASM_MEM_ALLOC_WITH_USAGE
-#define WASM_MEM_ALLOC_WITH_USAGE 1
+#define WASM_MEM_ALLOC_WITH_USAGE 0
 #endif
 
 #ifndef WASM_ENABLE_FUZZ_TEST
@@ -709,7 +709,7 @@ unless used elsewhere */
 #endif
 
 #ifndef WASM_ENABLE_SHRUNK_MEMORY
-#define WASM_ENABLE_SHRUNK_MEMORY 0
+#define WASM_ENABLE_SHRUNK_MEMORY 1
 #endif
 
 #ifndef WASM_ENABLE_AOT_VALIDATOR
