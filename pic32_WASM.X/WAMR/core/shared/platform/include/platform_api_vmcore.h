@@ -187,6 +187,8 @@ os_icache_flush(void *start, size_t len);
 
 int custom_strncasecmp(const char *s1, const char *s2, size_t n);
 
+TickType_t os_time_get_boot_microsecond(void);
+
 #ifdef __cplusplus
 }
 #endif

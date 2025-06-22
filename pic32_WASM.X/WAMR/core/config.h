@@ -194,7 +194,7 @@
 #endif
 
 #ifndef WAMR_ENABLE_COPY_CALLSTACK
-#define WAMR_ENABLE_COPY_CALLSTACK 0
+#define WAMR_ENABLE_COPY_CALLSTACK 1
 #endif
 
 #ifndef WASM_ENABLE_BASE_LIB
@@ -211,7 +211,7 @@
 
 /* Bulk memory operation */
 #ifndef WASM_ENABLE_BULK_MEMORY
-#define WASM_ENABLE_BULK_MEMORY 0
+#define WASM_ENABLE_BULK_MEMORY 1
 #endif
 
 /* Shared memory */
@@ -283,7 +283,7 @@
 
 /* Enable fast interpreter or not */
 #ifndef WASM_ENABLE_FAST_INTERP
-#define WASM_ENABLE_FAST_INTERP 0
+#define WASM_ENABLE_FAST_INTERP 1
 #endif
 
 #if WASM_ENABLE_FAST_INTERP != 0
@@ -292,12 +292,12 @@
 
 /* Enable opcode counter or not */
 #ifndef WASM_ENABLE_OPCODE_COUNTER
-#define WASM_ENABLE_OPCODE_COUNTER 0
+#define WASM_ENABLE_OPCODE_COUNTER 1
 #endif
 
 /* Support a module with dependency, other modules */
 #ifndef WASM_ENABLE_MULTI_MODULE
-#define WASM_ENABLE_MULTI_MODULE 0
+#define WASM_ENABLE_MULTI_MODULE 1
 #endif
 
 /* Enable wasm mini loader or not */
@@ -330,7 +330,7 @@ unless used elsewhere */
 
 /* GC performance profiling */
 #ifndef WASM_ENABLE_GC_PERF_PROFILING
-#define WASM_ENABLE_GC_PERF_PROFILING 0
+#define WASM_ENABLE_GC_PERF_PROFILING 1
 #endif
 
 /* Memory profiling */
@@ -345,7 +345,7 @@ unless used elsewhere */
 
 /* Performance profiling */
 #ifndef WASM_ENABLE_PERF_PROFILING
-#define WASM_ENABLE_PERF_PROFILING 0
+#define WASM_ENABLE_PERF_PROFILING 1
 #endif
 
 /* Dump call stack */
@@ -388,7 +388,7 @@ unless used elsewhere */
 
 /* Global heap pool size in bytes */
 #ifndef WASM_GLOBAL_HEAP_SIZE
-#define WASM_GLOBAL_HEAP_SIZE (32 * 1024)
+#define WASM_GLOBAL_HEAP_SIZE (8 * 1024)
 #endif
 
 /* Default length of queue */
@@ -403,7 +403,7 @@ unless used elsewhere */
 
 /* Default min/max heap size of each app */
 #ifndef APP_HEAP_SIZE_DEFAULT
-#define APP_HEAP_SIZE_DEFAULT (8 * 1024)
+#define APP_HEAP_SIZE_DEFAULT (1 * 1024)
 #endif
 #define APP_HEAP_SIZE_MIN (256)
 /* The ems memory allocator supports maximal heap size 1GB,
@@ -412,16 +412,16 @@ unless used elsewhere */
 
 /* Default min/max gc heap size of each app */
 #ifndef GC_HEAP_SIZE_DEFAULT
-#define GC_HEAP_SIZE_DEFAULT (16 * 1024)
+#define GC_HEAP_SIZE_DEFAULT (1 * 1024)
 #endif
-#define GC_HEAP_SIZE_MIN (4 * 1024)
+#define GC_HEAP_SIZE_MIN (1 * 1024)
 #define GC_HEAP_SIZE_MAX (1024 * 1024 * 1024)
 
 /* Default wasm stack size of each app */
 #if defined(BUILD_TARGET_X86_64) || defined(BUILD_TARGET_AMD_64)
-#define DEFAULT_WASM_STACK_SIZE (16 * 1024)
+#define DEFAULT_WASM_STACK_SIZE (3 * 1024)
 #else
-#define DEFAULT_WASM_STACK_SIZE (32 * 1024)
+#define DEFAULT_WASM_STACK_SIZE (1 * 1024)
 #endif
 /* Min auxiliary stack size of each wasm thread */
 #define WASM_THREAD_AUX_STACK_SIZE_MIN (256)
@@ -431,8 +431,8 @@ unless used elsewhere */
       && defined(APP_THREAD_STACK_SIZE_MIN))
 #if defined(BH_PLATFORM_ZEPHYR) || defined(BH_PLATFORM_ALIOS_THINGS) \
     || defined(BH_PLATFORM_ESP_IDF) || defined(BH_PLATFORM_OPENRTOS)
-#define APP_THREAD_STACK_SIZE_DEFAULT (6 * 1024)
-#define APP_THREAD_STACK_SIZE_MIN (4 * 1024)
+#define APP_THREAD_STACK_SIZE_DEFAULT (1 * 1024)
+#define APP_THREAD_STACK_SIZE_MIN (1 * 1024)
 #elif defined(PTHREAD_STACK_DEFAULT) && defined(PTHREAD_STACK_MIN)
 #define APP_THREAD_STACK_SIZE_DEFAULT PTHREAD_STACK_DEFAULT
 #define APP_THREAD_STACK_SIZE_MIN PTHREAD_STACK_MIN
@@ -441,8 +441,8 @@ unless used elsewhere */
 #define APP_THREAD_STACK_SIZE_DEFAULT (64 * 1024)
 #define APP_THREAD_STACK_SIZE_MIN (48 * 1024)
 #else
-#define APP_THREAD_STACK_SIZE_DEFAULT (128 * 1024)
-#define APP_THREAD_STACK_SIZE_MIN (24 * 1024)
+#define APP_THREAD_STACK_SIZE_DEFAULT (1 * 1024)
+#define APP_THREAD_STACK_SIZE_MIN (1 * 1024)
 #endif
 #endif /* end of !(defined(APP_THREAD_STACK_SIZE_DEFAULT) \
                    && defined(APP_THREAD_STACK_SIZE_MIN)) */
@@ -604,7 +604,7 @@ unless used elsewhere */
 #endif
 
 #ifndef WASM_ENABLE_EXCE_HANDLING
-#define WASM_ENABLE_EXCE_HANDLING 0
+#define WASM_ENABLE_EXCE_HANDLING 1
 #endif
 
 #ifndef WASM_ENABLE_TAGS

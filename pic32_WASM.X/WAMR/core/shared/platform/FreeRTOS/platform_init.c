@@ -94,6 +94,11 @@ int custom_strncasecmp(const char *s1, const char *s2, size_t n) {
     }
     return s1[i] - s2[i]; // Handle strings of different lengths
 }
+
+TickType_t os_time_get_boot_microsecond(void)
+{
+    return(TickType_t)(xTaskGetTickCount() * portTICK_PERIOD_MS * 1000);
+}
 //
 //uint64
 //os_time_get_boot_us(void)

@@ -3685,14 +3685,14 @@ wasm_dump_perf_profiling(const WASMModuleInstance *module_inst)
         if (func_name)
             os_printf(
                 "  func %s, execution time: %.3f ms, execution count: %" PRIu32
-                " times, children execution time: %.3f ms\n",
+                " times, children execution time: %.3f ms\n\r",
                 func_name, func_inst->total_exec_time / 1000.0f,
                 func_inst->total_exec_cnt,
                 func_inst->children_exec_time / 1000.0f);
         else
             os_printf("  func %" PRIu32
                       ", execution time: %.3f ms, execution count: %" PRIu32
-                      " times, children execution time: %.3f ms\n",
+                      " times, children execution time: %.3f ms\n\r",
                       i, func_inst->total_exec_time / 1000.0f,
                       func_inst->total_exec_cnt,
                       func_inst->children_exec_time / 1000.0f);

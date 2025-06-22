@@ -5,6 +5,8 @@ build/default/production/FreeRTOS-Kernel-11.2.0/portable/MPLAB/PIC32MZ/UART2_isr
 build/default/production/FreeRTOS-Kernel-11.2.0/portable/MPLAB/PIC32MZ/UART2_isr.o:  \
  FreeRTOS-Kernel-11.2.0/portable/MPLAB/PIC32MZ/FreeRTOSConfig.h  \
  FreeRTOS-Kernel-11.2.0/portable/MPLAB/PIC32MZ/ISR_Support.h  \
+ /opt/microchip/xc32/v4.60/pic32mx/include/pic32m-libs/sys/asm.h  \
+ /opt/microchip/xc32/v4.60/pic32mx/include/pic32m-libs/cp0defs.h  \
  /opt/microchip/mplabx/v6.25/packs/Microchip/PIC32MZ-EF_DFP/1.4.168/include/proc/p32mz2048efm100.h  \
  /opt/microchip/mplabx/v6.25/packs/Microchip/PIC32MZ-EF_DFP/1.4.168/include/xc-pic32m.h  \
  /opt/microchip/mplabx/v6.25/packs/Microchip/PIC32MZ-EF_DFP/1.4.168/include/xc.h  \

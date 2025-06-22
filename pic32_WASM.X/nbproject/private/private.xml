@@ -3,7 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/collins/WASM_PIC32/pic32_WASM.X/FreeRTOS-Kernel-11.2.0/main.c</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/WAMR/core/shared/utils/uncommon/bh_getopt.c</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/WAMR/core/iwasm/common/wasm_application.c</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/WAMR/core/shared/utils/bh_hashmap.c</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/WAMR/core/iwasm/interpreter/wasm_loader.c</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/WAMR/core/shared/platform/include/platform_internal.h</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/FreeRTOS-Kernel-11.2.0/main.c</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/WAMR/core/iwasm/interpreter/wasm_runtime.h</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/WAMR/core/iwasm/common/wasm_runtime_common.c</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/WAMR/core/iwasm/common/wasm_exec_env.c</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/WAMR/core/iwasm/interpreter/wasm_interp_classic.c</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/WAMR/core/aot/aot_loader.c</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/WAMR/core/iwasm/common/gc/gc_type.c</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/WAMR/core/iwasm/include/wasm_export.h</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/WAMR/core/config.h</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/WAMR/core/iwasm/interpreter/wasm_interp_fast.c</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/WAMR/core/shared/utils/bh_queue.c</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/include/private/test_wasm.h</file>
+            <file>file:/home/ashish/WASM_PIC32/pic32_WASM.X/FreeRTOS-Kernel-11.2.0/UART2.c</file>
         </group>
     </open-files>
 </project-private>

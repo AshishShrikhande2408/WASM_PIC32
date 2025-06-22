@@ -32,7 +32,7 @@
 /* Priorities at which the tasks are created. */
 #define mainQUEUE_SEND_TASK_PRIORITY       ( tskIDLE_PRIORITY + 1 )
 #define mainQUEUE_RECEIVE_TASK_PRIORITY    ( tskIDLE_PRIORITY + 2 )
-#define CONFIG_APP_STACK_SIZE 4096
+#define CONFIG_APP_STACK_SIZE 1024
 #define CONFIG_APP_HEAP_SIZE 2048
 
 static pthread_t thread_id_GreenLed,thread_id_AmberLed,thread_id_uart,thread_id_WASM;
@@ -297,6 +297,8 @@ void *
 iwasm_main(void *arg)
 {
     (void)arg; /* unused */
+    TickType_t xLastWakeTime;
+    const TickType_t xFrequency = 5000;
     /* setup variables for instantiating and running the wasm module */
     uint8_t *wasm_file_buf = NULL;
     unsigned wasm_file_buf_size = 0;
@@ -305,7 +307,8 @@ iwasm_main(void *arg)
     char error_buf[128];
     void *ret;
     RuntimeInitArgs init_args;
-
+    
+    
     /* configure memory allocation */
     memset(&init_args, 0, sizeof(RuntimeInitArgs));
     
@@ -315,9 +318,11 @@ iwasm_main(void *arg)
     //init_args.mem_alloc_option.allocator.malloc_func = (void *)os_malloc;
     //init_args.mem_alloc_option.allocator.realloc_func = (void *)os_realloc;
     //init_args.mem_alloc_option.allocator.free_func = (void *)os_free;
+    init_args.gc_heap_size = GC_HEAP_SIZE_DEFAULT;
     init_args.mem_alloc_type = Alloc_With_Pool;
     init_args.mem_alloc_option.pool.heap_buf = global_heap_buf;
     init_args.mem_alloc_option.pool.heap_size = sizeof(global_heap_buf);
+    init_args.running_mode = Mode_Interp;
     printf("\n\r******************************Start WAMR*********************************\n\r");
     printf("Initialize WASM runtime\n\r");
     /* initialize runtime environment */
@@ -360,8 +365,13 @@ iwasm_main(void *arg)
 
        
     printf("run main() of the application\n\r");
-    ret = app_instance_main(wasm_module_inst);
-    assert(!ret);
+    xLastWakeTime = xTaskGetTickCount();
+    while(1)
+    {
+        ret = app_instance_main(wasm_module_inst);
+        assert(!ret);
+        vTaskDelayUntil( &xLastWakeTime, xFrequency );
+    }
     printf("run main() was successful!!\n\r");
      
     /* destroy the module instance */
@@ -387,7 +397,7 @@ int main( void )
     /* Prepare the hardware to run this demo. */
     prvSetupHardware();
     pthread_attr_init(&wasm_attr);
-    pthread_attr_setstacksize(&wasm_attr, 32768);
+    pthread_attr_setstacksize(&wasm_attr, 16384);
     pthread_create( &thread_id_GreenLed, NULL, blinkLEDGreen, NULL );
     pthread_create( &thread_id_AmberLed, NULL, blinkLEDAmber, NULL );    
     pthread_create( &thread_id_uart, NULL, uartSendTask, NULL );

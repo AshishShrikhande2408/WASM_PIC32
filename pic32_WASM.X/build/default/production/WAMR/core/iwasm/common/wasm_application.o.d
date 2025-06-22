@@ -65,7 +65,9 @@ build/default/production/WAMR/core/iwasm/common/wasm_application.o: \
  WAMR/core/iwasm/interpreter/../common/../common/wasm_runtime_common.h \
  WAMR/core/iwasm/common/gc/gc_object.h \
  WAMR/core/iwasm/common/gc/stringref/string_object.h \
- WAMR/core/iwasm/interpreter/wasm.h
+ WAMR/core/iwasm/interpreter/wasm.h \
+ WAMR/core/iwasm/common/../../shared/mem-alloc/mem_alloc.h \
+ WAMR/core/iwasm/common/gc/../../common/gc/gc_object.h
 
 WAMR/core/shared/utils/bh_platform.h:
 
@@ -218,3 +220,7 @@ WAMR/core/iwasm/common/gc/gc_object.h:
 WAMR/core/iwasm/common/gc/stringref/string_object.h:
 
 WAMR/core/iwasm/interpreter/wasm.h:
+
+WAMR/core/iwasm/common/../../shared/mem-alloc/mem_alloc.h:
+
+WAMR/core/iwasm/common/gc/../../common/gc/gc_object.h:

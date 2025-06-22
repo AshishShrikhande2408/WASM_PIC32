@@ -276,7 +276,7 @@
         <property key="oXC16gcc-sfr-warn" value="false"/>
         <property key="oXC16gcc-smar-io-lvl" value="1"/>
         <property key="oXC16gcc-smart-io-fmt" value=""/>
-        <property key="optimization-level" value="-O0"/>
+        <property key="optimization-level" value="-Os"/>
         <property key="place-data-into-section" value="true"/>
         <property key="post-instruction-scheduling" value="no-schedule-insns2"/>
         <property key="pre-instruction-scheduling" value="no-schedule-insns"/>
@@ -343,7 +343,7 @@
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-cross-reference-file" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
-        <property key="heap-size" value="65536"/>
+        <property key="heap-size" value="8192"/>
         <property key="input-libraries" value=""/>
         <property key="kseg-length" value=""/>
         <property key="kseg-origin" value=""/>
@@ -362,7 +362,7 @@
         <property key="report-memory-usage" value="false"/>
         <property key="serial-length" value=""/>
         <property key="serial-origin" value=""/>
-        <property key="stack-size" value="65536"/>
+        <property key="stack-size" value="8192"/>
         <property key="symbol-stripping" value=""/>
         <property key="trace-symbols" value=""/>
         <property key="warn-section-align" value="false"/>
@@ -1842,7 +1842,7 @@
         </C32Global>
       </item>
       <item path="WAMR/core/iwasm/interpreter/wasm_interp_classic.c"
-            ex="false"
+            ex="true"
             overriding="false">
         <C32>
         </C32>
@@ -1860,7 +1860,7 @@
         </C32Global>
       </item>
       <item path="WAMR/core/iwasm/interpreter/wasm_interp_fast.c"
-            ex="true"
+            ex="false"
             overriding="false">
         <C32>
         </C32>
@@ -2050,8 +2050,6 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="1d000000-33ffffff"/>
         <property key="poweroptions.powerenable" value="false"/>
-        <property key="programmerToGoFilePath"
-                  value="/home/ashish/WASM_PIC32/pic32_WASM.X/debug/default/pic32_WASM_ptg"/>
         <property key="programmerToGoImageName" value="pic32_WASM_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>

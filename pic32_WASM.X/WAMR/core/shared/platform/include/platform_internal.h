@@ -23,6 +23,10 @@
 #include "FreeRTOS_POSIX/pthread.h"
 #include "task.h"
 
+#ifndef WASM_ENABLE_LABELS_AS_VALUES
+#define WASM_ENABLE_LABELS_AS_VALUES 0
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
